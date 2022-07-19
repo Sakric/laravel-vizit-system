@@ -46,7 +46,7 @@
         <div class="w-1/2 h-1/2 bg-[#329D9C]/40 flex items-center justify-center flex-col gap-8 font-sans">
             <h2>{{$user}}</h2>
             <h2 class="text-white text-4xl">Vizito Sistema</h2>
-            <h1 class="text-white text-5xl">Tavo Gydimas Prasideda Čia</h1>
+            <h1 class="text-white text-5xl">Tavo Gydimas Prasideda Čiasssssss</h1>
             <button class="bg-[#205072] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
                 Žiurėti gydytojus
             </button>
