@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\Voucher;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,9 +87,10 @@ Route::post('/dashboard/categories/new', [CategoriesController::class, 'store'])
 Route::post('/dashboard/categories/edit/{category}', [CategoriesController::class, 'update']);
 Route::delete('/dashboard/categories/delete/{category}', [CategoriesController::class, 'delete']);
 
-Route::get('/dashboard/test/{doctor}', [AdminController::class, 'createReservations']);
+Route::post('/dashboard/doctors/reservation/create/{doctor}', [AdminController::class, 'createReservations']);
 Route::post('/dashboard/doctors/voucher/new', [VoucherController::class, 'createVoucher']);
-Route::get('/doctors/rezervation/set', [ReservationController::class, 'createVizit'])->middleware(['auth']);
+Route::get('/doctors/reservation/set/{doctor}/{reservation}', [ReservationController::class, 'createVizit'])->middleware(['auth']);
+Route::post('/doctors/reservation/set/{doctor}/{reservation}', [ReservationController::class, 'confirmVizit'])->middleware(['auth']);
 
 ///doctors/rezervation/1
 

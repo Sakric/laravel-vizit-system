@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use function Illuminate\Support\Facades\Request;
 
 class AdminController extends Controller
 {
@@ -68,7 +67,7 @@ class AdminController extends Controller
             'body' => 'required',
         ]);
 
-        $attributes['thumbnail'] = request()->file('thumbnail')->store('doctors');
+        $attributes['thumbnail'] = request()->file('thumbnails')->store('doctors');
 
         $user = User::where('id', $attributes['user_id'])->first();
 
@@ -87,8 +86,6 @@ class AdminController extends Controller
         $attributes = request()->validate([
             'thumbnail' => 'image',
             'category_id' => 'required',
-//            'specialization' => 'required',
-//            'education' => 'required',
             'body' => 'required',
         ]);
         if (isset($attributes['thumbnail'])) {
@@ -121,6 +118,7 @@ class AdminController extends Controller
         $day = array();
         $day_2 = array();
         for ($i = 0; $i <= 23; $i++) {
+
             $value = strftime("%Y-%m-%d %H-%M-%S", mktime(0, 0, 0, date("m")  , date("d")+$i, date("Y")));
             $value_2 = ucfirst(strftime("%A", mktime(0, 0, 0, date("m")  , date("d")+$i, date("Y"))));
 //            $value_day = ucfirst(substr($value, 0, 3));
@@ -154,7 +152,7 @@ class AdminController extends Controller
             $final[] = $rezervation;
 
         }
-        return $final;
+        return redirect('/dashboard/doctors/vouchers/' . $doctor->id);
 
     }
 

@@ -42,7 +42,7 @@
     <body>
     <x-navbar/>
 
-    <header class="flex items-center justify-center">
+    <header class="flex items-center justify-center bg-[url('/img/header.jpg')]">
         <div class="w-1/2 h-1/2 bg-[#329D9C]/40 flex items-center justify-center flex-col gap-8 font-sans">
             <h2>{{$user}}</h2>
             <h2 class="text-white text-4xl">Vizito Sistema</h2>
@@ -95,7 +95,7 @@
         </div>
     </div>
 
-    <div class="flex items-center justify-center w-full flex-col gap-8 h-96 hero text-white">
+    <div class="flex items-center justify-center w-full flex-col gap-8 h-96 hero text-white bg-[url('/img/header_2.jpg')]">
         <h1 class="text-4xl">Vizito sistema turi profesionalius specialistus</h1>
         <p class="text-xl">Rinkitis spaicialistus iš ivairiu lauku</p>
         <button class="bg-[#205072] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">

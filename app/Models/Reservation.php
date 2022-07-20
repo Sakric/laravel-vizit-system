@@ -9,7 +9,12 @@ class Reservation extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    public $timestamps = false;
+//    public $date = false;
+
+    public $timestamps = true;
+//    protected $casts = [
+//        'date' => 'date hh:mm:ss'
+//    ];
 
     public function doctor(){
         return $this->belongsTo(Doctors::class, 'doctor_id');

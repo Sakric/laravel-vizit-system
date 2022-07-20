@@ -91,7 +91,7 @@
 
         @endphp
         <div class="swiper mySwiper w-[720px] bg-gray-100 rounded-lg pb-3">
-            <form method="POST" id="myForm" action="/doctors/rezervation/set" class="swiper-wrapper">
+            <form method="GET" id="myForm" action="/doctors/reservation/set/{{$doctor->id}}" class="swiper-wrapper">
                 @csrf
                 @for($i = 0; $i < 8 ; $i+= 2)
                 <div class="swiper-slide flex flex-col gap-2">
@@ -211,6 +211,7 @@
                                 let form = document.getElementById("myForm");
                                 let input = document.getElementById(`input-${id}`);
                                 input.disabled = false;
+                                form.action = `${form.action}/${id}`
                                 form.submit();
                         });
 

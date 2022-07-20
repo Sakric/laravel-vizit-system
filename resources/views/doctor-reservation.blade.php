@@ -30,7 +30,7 @@
 <div class="w-full h-72 bg-gradient-to-r from-[#40AACA] to-[#35BCA3] flex items-center justify-center">
     <h1 class="text-white text-5xl -mt-28">Vizito Registracija</h1>
 </div>
-{{$reservation->date}}
+<p class="hidden">{{$reservation}}</p>
 @php
     setlocale(LC_ALL, 'lt_lt.UTF-8');
 $a = substr($reservation->date, 0, 4);
@@ -80,32 +80,33 @@ $value_time = ucfirst(strftime("%H:%M", mktime($h, $m, 0, $c, $b, $a)));
 
             <h1 class="mt-5 text-3xl font-semibold text-[#35BCA3] mx-auto">Jūsų duomenys</h1>
             <div class="flex flex-col mt-2 mx-auto w-full">
-                <form>
+                <form method="POST" class="space-y-6" action="/doctors/reservation/set/{{$reservation->doctor->id}}/{{$reservation->id}}">
+                    @csrf
                     <div class="mb-6">
-                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Jūsų vardas ir pavardė <span class="text-red-500">*</span></label>
-                        <input disabled type="text" id="name" value="{{$user->name}} {{$user->lastname}}" class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Vardas Pavardenis" required>
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Jūsų vardas ir pavardė <span class="text-red-500">*</span></label>
+                        <input disabled type="text" id="name" name="name" value="{{$user->name}} {{$user->lastname}}" class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Vardas Pavardenis" required>
                     </div>
                     <div class="mb-6">
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">El. p. adresas <span class="text-red-500">*</span></label>
-                        <input disabled type="email" id="email" value="{{$user->email}}" class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required>
+                        <input disabled type="email" id="email" name="email" value="{{$user->email}}" class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required>
                     </div>
                     <div class="mb-6">
-                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Telefonas <span class="text-red-500">*</span></label>
-                        <input disabled type="text" id="phone" value="{{$user->phone}}" class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required>
+                        <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Telefonas <span class="text-red-500">*</span></label>
+                        <input disabled type="text" id="phone" name="phone" value="{{$user->phone}}" class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required>
                     </div>
                     <div class="mb-6">
-                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Paslaugos <span class="text-red-500">*</span></label>
-                        <select id="form-role" name="role_id"
+                        <label for="service" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Paslaugos <span class="text-red-500">*</span></label>
+                        <select id="form-role" name="service"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="1">Nusipraust (34 eu)</option>
+                            <option value="Nusipraust (34 eu)">Nusipraust (34 eu)</option>
                             <option value="1">Nusipraust (34 eu)</option>
                             <option value="1">Nusipraust (34 eu)</option>
                             <option value="1">Nusipraust (34 eu)</option>
                         </select>
                     </div>
                     <div class="mb-6">
-                        <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Komentaras / vizito priežastis:</label>
-                        <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Įveskite tekstą"></textarea>
+                        <label for="comment" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Komentaras / vizito priežastis:</label>
+                        <textarea id="comment" rows="4" name="comment" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Įveskite tekstą"></textarea>
                     </div>
 {{--                    <div class="mb-6">--}}
 {{--                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Mob. tel. nr. <span class="text-red-500">*</span></label>--}}
