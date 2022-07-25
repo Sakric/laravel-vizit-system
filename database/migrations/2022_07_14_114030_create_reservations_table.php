@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('doctor_id');
             $table->foreignId('user_id')->nullable();
             $table->dateTime('date');
-            $table->string('service')->nullable();
+            $table->foreignId('service_id')->nullable();
             $table->text('comment')->nullable();
             $table->timestamps();
         });

@@ -41,7 +41,6 @@
         <div class="flex w-full mt-5">
             <div class="flex flex-col w-2/3 pr-5 leading-loose">
                 {!! $doctor->body !!}
-{{--                {{$doctor->experience }}--}}
             </div>
             <div class="flex w-1/3 flex-col" >
                 <img style="width: 380px; height: 550px" class="rounded-lg" src="/storage/{{$doctor->thumbnail}}" alt="{{$doctor->name}}" />
@@ -54,6 +53,32 @@
                 </div>
             </div>
         </div>
+
+
+        <div id="accordion-arrow-icon" data-accordion="open" class="mt-5">
+            <h2 id="accordion-arrow-icon-heading-3">
+                <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800" data-accordion-target="#accordion-arrow-icon-body-3" aria-expanded="false" aria-controls="accordion-arrow-icon-body-3">
+                    <p class="text-2xl">Paslaugos</p>
+                    <svg class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+            </h2>
+            <div id="accordion-arrow-icon-body-3" class="hidden" aria-labelledby="accordion-arrow-icon-heading-3">
+                <div class="p-5 font-light border border-t-0 border-gray-200 dark:border-gray-700">
+                    <h1 class="text-3xl text-[#35BCA3] font-semibold">{{$doctor->user->name}} {{$doctor->user->lastname}} paslaugos</h1>
+                    <div class="w-[60vh] mt-5">
+                        <div class="w-full h-[1px] bg-[#35BCA3]"></div>
+                    @foreach($doctor->services as $services)
+                        <div class="flex justify-between">
+                            <p class="text-xl font-semibold p-2">{{$services->name}}</p>
+                            <p class="text-xl font-semibold p-2">{{$services->price}}</p>
+                        </div>
+                        <div class="w-full h-[1px] bg-[#35BCA3]"></div>
+                    @endforeach
+
+                </div>
+            </div>
+        </div>
+
 
 
         @php
@@ -90,7 +115,7 @@
 
 
         @endphp
-        <div class="swiper mySwiper w-[720px] bg-gray-100 rounded-lg pb-3">
+        <div class="swiper mySwiper w-[720px] bg-gray-100 rounded-lg pb-3 mt-5">
             <form method="GET" id="myForm" action="/doctors/reservation/set/{{$doctor->id}}" class="swiper-wrapper">
                 @csrf
                 @for($i = 0; $i < 8 ; $i+= 2)
@@ -240,6 +265,8 @@
         </script>
 
     </div>
+    </div>
+
 
 
 
@@ -313,7 +340,6 @@
             </div>
         </div>
     </footer>
-
 
     </body>
 

@@ -40,7 +40,7 @@ class ReservationController extends Controller
     public function confirmVizit(Doctors $doctor, Reservation $reservation)
     {
         $reservation->update([
-            'service' => request()->service,
+            'service_id' => request()->service,
             'comment' => request()->comment,
             'user_id' => Auth::user()->id,
         ]);

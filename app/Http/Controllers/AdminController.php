@@ -145,7 +145,7 @@ class AdminController extends Controller
             $rezervation = array();
             $rezervation['doctor_id'] = $doctor->id;
             $rezervation['user_id'] = null;
-            $rezervation['service'] = null;
+            $rezervation['service_id'] = null;
             $rezervation['date'] = $date;
 
             Reservation::create($rezervation);

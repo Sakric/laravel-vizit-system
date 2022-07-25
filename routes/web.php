@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TypeaheadController;
 use App\Http\Controllers\VoucherController;
 use App\Models\Category;
@@ -67,6 +68,7 @@ Route::post('/dashboard/doctors/new', [AdminController::class, 'storeDoctor']);
 Route::post('/dashboard/doctors/create', [AdminController::class, 'createDoctor']);
 Route::post('/dashboard/doctors/edit/{doctor}', [AdminController::class, 'updateDoctor']);
 Route::delete('/dashboard/doctors/delete/{doctor}', [AdminController::class, 'deleteDoctor']);
+Route::get('/dashboard/services', [ServiceController::class, 'open']);
 
 
 Route::get('/dashboard/doctors/edit/{doctor}', function (Doctors $doctor){

@@ -128,21 +128,26 @@
                         <a href="#">
                             <h5 id="name-{{$doctor->id}}" class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{$doctor->user->name}} {{$doctor->user->lastname}}</h5>
                         </a>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{$doctor->category->name}}</p>
-                        <div class="flex justify-between">
+                        <p class="text-gray-500">{{$doctor->category->name}}</p>
+                        <div class="flex justify-between flex-wrap mt-2">
                         <a href="/dashboard/doctors/edit/{{$doctor->id}}" type="button"
-                           class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                           class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white transition rounded-lg bg-blue-700 hover:bg-white border-[1px] border-blue-700 hover:text-blue-700 text-white  focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             Redaguoti
                         </a>
                             <a href="/dashboard/doctors/vouchers/{{$doctor->id}}" type="button"
-                               class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-yellow-700 rounded-lg hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                               class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-yellow-700 transition rounded-lg bg-yellow-600 hover:bg-white border-[1px] border-yellow-600 hover:text-yellow-600 text-white  dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 Talonai
                             </a>
                         <a href="#" data-type="delete" type="button" data-modal-toggle="popup-modal" data-id="{{$doctor->id}}"
-                           class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                           class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-red-700  transition rounded-lg bg-red-600 hover:bg-white border-[1px] border-red-600 hover:text-red-600 text-white dark:focus:ring-blue-800">
                             Naikinti
                         </a>
+
                         </div>
+                        <a href="/dashboard/doctors/edit/{{$doctor->id}}" type="button"
+                           class="mt-2 inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700  transition rounded-lg bg-teal-600 hover:bg-white border-[1px] border-teal-600 hover:text-teal-600 text-white dark:bg-teal-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Paslaugos
+                        </a>
                     </div>
                 </div>
 
