@@ -5,10 +5,12 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TypeaheadController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoucherController;
 use App\Models\Category;
 use App\Models\Doctors;
 use App\Models\Role;
+use App\Models\Service;
 use App\Models\User;
 use App\Models\Voucher;
 use Illuminate\Support\Facades\Auth;
@@ -95,6 +97,31 @@ Route::get('/doctors/reservation/set/{doctor}/{reservation}', [ReservationContro
 Route::post('/doctors/reservation/set/{doctor}/{reservation}', [ReservationController::class, 'confirmVizit'])->middleware(['auth']);
 
 ///doctors/rezervation/1
+// Services routes
+Route::post('/dashboard/services/new', [ServiceController::class, 'store']);
+Route::post('/dashboard/services/edit/{service}', [ServiceController::class, 'update']);
+Route::delete('/dashboard/services/delete/{service}', [ServiceController::class, 'delete']);
+Route::post('/dashboard/doctors/services/{doctor}', [ServiceController::class, 'updateDoctor']);
+
+Route::get('/dashboard/doctors/services/{doctor}', function (Doctors $doctor){
+    return view('dashboard.doctors-services', [
+        'doctor' => $doctor,
+        'services' => Service::all()
+    ]);
+});
+
+// User routes
+Route::post('/profile/update', [UserController::class, 'update']);
+Route::post('/profile/update/password', [UserController::class, 'updatePassword']);
+Route::get('/profile', function (){
+    return view('user-profile',[
+        'user' => Auth::user()
+    ]);
+});
+
+
+
+
 
 
 

@@ -38,7 +38,7 @@
                 </button>
                 <div class="py-6 px-6 lg:px-8">
                     <h3 id="form-label" class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Sukurti naują
-                        kategorija</h3>
+                        paslaugą</h3>
                     <form method="POST" id="form-user" class="space-y-6" action="#">
                         @csrf
                         <div>
@@ -48,9 +48,16 @@
                                    placeholder="Pavadinimas" required="">
                         </div>
 
+                        <div>
+                            <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Kaina</label>
+                            <input type="number" name="price" id="form-price"
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                   placeholder="10" required="">
+                        </div>
+
                         <button type="submit" id="form-button"
                                 class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Sukurti kategoriją
+                            Sukurti paslaugą
                         </button>
                     </form>
                 </div>
@@ -111,7 +118,7 @@
             <button data-type="new"
                     class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     type="button" data-modal-toggle="authentication-modal">
-                Sukurti naują kategorija
+                Sukurti naują paslaugą
             </button>
         </div>
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -143,8 +150,8 @@
                         <td id="name-{{$service->id}}" class="px-6 py-4">
                             {{$service->name}}
                         </td>
-                        <td id="price-{{$service->id}}" class="px-6 py-4">
-                            {{$service->price}}
+                        <td  class="px-6 py-4">
+                            <span id="price-{{$service->id}}">{{$service->price}}</span> €
                         </td>
                         <td class="px-6 py-4">
                             <a type="button" data-type="edit" data-modal-toggle="authentication-modal" href="#"
@@ -168,6 +175,7 @@
     const container = document.querySelector("body");
     const main = document.getElementById('main');
     const formName = document.getElementById('form-name');
+    const formPrice = document.getElementById('form-price');
     const formButton = document.getElementById('form-button');
     const formLabel = document.getElementById('form-label');
     const form = document.getElementById('form-user');
@@ -185,25 +193,27 @@
         // If Target Element Is a Button
         if (element.nodeName === 'BUTTON') {
             if (element.dataset.type === 'new') {
-                form.action = '/dashboard/categories/new';
+                form.action = '/dashboard/services/new';
                 formName.value = '';
-                formLabel.innerHTML = `Sukurti naują kategorija`;
-                formButton.innerHTML = 'Sukurti naują kategorija'
+                formLabel.innerHTML = `Sukurti naują paslaugą`;
+                formButton.innerHTML = 'Sukurti naują paslaugą'
             }
         }
         if (element.nodeName === 'A') {
             if (element.dataset.type === 'edit') {
                 let id = element.dataset.id;
                 let stringName = document.getElementById(`name-${id}`).innerHTML.trim()
-                form.action = `/dashboard/categories/edit/${id}`
+                let stringPrice = document.getElementById(`price-${id}`).innerHTML.trim()
+                form.action = `/dashboard/services/edit/${id}`
                 formName.value = stringName;
+                formPrice.value = stringPrice;
                 formLabel.innerHTML = `Redaguoti ${stringName}`;
-                formButton.innerHTML = 'Redaguoti kategorija'
+                formButton.innerHTML = 'Redaguoti paslaugą'
             }
             if (element.dataset.type === 'delete') {
                 let id = element.dataset.id;
                 let name = document.getElementById(`name-${id}`).innerHTML.trim()
-                deleteForm.action = `/dashboard/categories/delete/${id}`;
+                deleteForm.action = `/dashboard/services/delete/${id}`;
                 deleteLabel.innerHTML = `Ar tikrai norite trinti ${name} [ID: ${id}]`;
             }
 

@@ -22,8 +22,6 @@
 <div class="h-screen flex">
     @include('dashboard.components.sidebar')
 
-
-
     <div id="main" class="w-full overflow-auto bg-gray-100 h-screen p-10">
 
         <!-- Main modal -->
@@ -144,7 +142,7 @@
                         </a>
 
                         </div>
-                        <a href="/dashboard/doctors/edit/{{$doctor->id}}" type="button"
+                        <a href="/dashboard/doctors/services/{{$doctor->id}}" type="button"
                            class="mt-2 inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700  transition rounded-lg bg-teal-600 hover:bg-white border-[1px] border-teal-600 hover:text-teal-600 text-white dark:bg-teal-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             Paslaugos
                         </a>

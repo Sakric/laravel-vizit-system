@@ -70,7 +70,7 @@
                     @foreach($doctor->services as $services)
                         <div class="flex justify-between">
                             <p class="text-xl font-semibold p-2">{{$services->name}}</p>
-                            <p class="text-xl font-semibold p-2">{{$services->price}}</p>
+                            <p class="text-xl font-semibold p-2">{{$services->price}} €</p>
                         </div>
                         <div class="w-full h-[1px] bg-[#35BCA3]"></div>
                     @endforeach

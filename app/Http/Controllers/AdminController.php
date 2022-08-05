@@ -26,8 +26,6 @@ class AdminController extends Controller
         $attributes['password'] = Hash::make($attributes['password']);
         $user->create($attributes);
         return redirect('/dashboard/users');
-
-
     }
 
     public function update(User $user)
