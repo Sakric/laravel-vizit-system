@@ -119,6 +119,12 @@ Route::get('/profile', function (){
     ]);
 });
 
+Route::get('/visit', function (){
+    return view('user-visits',[
+        'user' => Auth::user()
+    ]);
+});
+
 
 
 
