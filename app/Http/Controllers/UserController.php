@@ -59,6 +59,13 @@ class UserController extends Controller
 
         return redirect('/profile');
     }
+
+    public function autocompleteSearch($query)
+    {
+        $filterResult = User::query()
+            ->where('id', "{$query}")->get();
+        return response()->json($filterResult);
+    }
 }
 
 

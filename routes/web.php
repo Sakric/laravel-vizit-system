@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\TypeaheadController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoucherController;
 use App\Models\Category;
 use App\Models\Doctors;
+use App\Models\Reservation;
 use App\Models\Role;
 use App\Models\Service;
 use App\Models\User;
@@ -43,7 +45,7 @@ Route::get('/doctors', function () {
 Route::get('/doctors/{doctor}', function (Doctors $doctor) {
     return view('doctor-page',[
         'doctor' => $doctor,
-        'reservations' => \App\Models\Reservation::all()
+        'reservations' => Reservation::all()
     ]);
 });
 Route::get('/dashboard/users', function () {
@@ -115,9 +117,37 @@ Route::post('/profile/update', [UserController::class, 'update']);
 Route::post('/profile/update/password', [UserController::class, 'updatePassword']);
 Route::get('/profile', function (){
     return view('user-profile',[
+        'user' => Auth::user(),
+        'reservations' => Reservation::where('user_id', '=', Auth::user()->id)->latest()->get()
+    ]);
+});
+
+Route::get('/profile/{reservation}', function (Reservation $reservation){
+    return view('user-reservation',[
+        'reservation' => $reservation
+    ]);
+});
+
+Route::get('/visit', function (){
+    return view('user-visits',[
         'user' => Auth::user()
     ]);
 });
+
+// Doctor
+
+Route::get('/doctor', function (){
+    return view('doctor-dashboard',[
+        'user' => Auth::user(),
+        'reservations' => Reservation::where('user_id', '=', Auth::user()->id)->latest()->get()
+    ]);
+});
+
+Route::get('/doctor/reservation-{reservation}-doctor{doctor}', [DoctorController::class, 'openReservation']);
+
+
+Route::get('/doctor-search/{query}', [DoctorController::class, 'autocompleteSearch']);
+Route::get('/user-search/{query}', [UserController::class, 'autocompleteSearch']);
 
 
 

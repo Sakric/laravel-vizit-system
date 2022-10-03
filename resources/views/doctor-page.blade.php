@@ -32,7 +32,7 @@
 
 
     <div class="container mx-auto w-[95%] -mt-28 px-10 py-5 bg-white rounded-lg shadow-md">
-        <p> <a class="text-[#35BCA3] hover:text-[#40AACA]" href="/doctors">dakatari</a> > {{$doctor->user->name}} {{$doctor->user->lastname}} </p>
+        <p> <a class="text-[#35BCA3] hover:text-[#40AACA]" href="/doctors">Gydytojai</a> > {{$doctor->user->name}} {{$doctor->user->lastname}} </p>
 
         <h1 class="text-2xl mt-4 font-light">{{$doctor->category->name}}</h1>
 

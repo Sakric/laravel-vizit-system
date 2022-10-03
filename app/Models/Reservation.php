@@ -19,4 +19,12 @@ class Reservation extends Model
     public function doctor(){
         return $this->belongsTo(Doctors::class, 'doctor_id');
     }
+
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function service(){
+        return $this->belongsTo(Service::class, 'service_id');
+    }
 }

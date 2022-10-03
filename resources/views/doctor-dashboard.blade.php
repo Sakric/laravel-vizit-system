@@ -9,7 +9,7 @@
     <script src="https://kit.fontawesome.com/e5248e6090.js" crossorigin="anonymous"></script>
 
 
-    <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css"/>
     <script src="https://cdn.tailwindcss.com"></script>
 
     <link
@@ -25,9 +25,67 @@
 
 </head>
 <body>
+<div id="draw" class="fixed h-full w-[380px] bg-white z-40 transition p-4 overflow-y-auto -translate-x-[380px]">
+    <h5 class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
+        <svg class="w-5 h-5 mr-2" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+             xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                  clip-rule="evenodd"></path>
+        </svg>
+        Info
+    </h5>
+    <button type="button" id="draw-button"
+            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clip-rule="evenodd"></path>
+        </svg>
+        <span class="sr-only">Close menu</span>
+    </button>
+    <div class="p-5 mb-4 bg-gray-50 rounded-lg border border-gray-100 dark:bg-gray-800 dark:border-gray-700">
+        <time id="draw-time" class="text-lg font-semibold text-gray-900 dark:text-white">January 13th, 2022</time>
+        <ol id="vis-times" class="mt-3 divide-y divider-gray-200">
+{{--            <li>--}}
+{{--                <a href="#" class="block items-center p-3 sm:flex hover:bg-gray-100 dark:hover:bg-gray-700">--}}
+{{--                    <div class="text-gray-600 dark:text-gray-400">--}}
+{{--                        <div class="text-base font-medium text-gray-900"> Susitikimas su Lukas Martinkus 10:20</div>--}}
+{{--                        <div class="text-sm font-normal">"Man reikia pagalbos"</div>--}}
+{{--                    </div>--}}
+{{--                </a>--}}
+{{--            </li>--}}
+{{--            <li>--}}
+{{--                <a href="#" class="block items-center p-3 sm:flex hover:bg-gray-100 dark:hover:bg-gray-700">--}}
+{{--                    <div class="text-gray-600 dark:text-gray-400">--}}
+{{--                        <div class="text-base font-medium text-gray-900"> Susitikimas su Marta Saulėgraža 10:20</div>--}}
+{{--                        <div class="text-sm font-normal">"Sakauda nugara, negaliu užmigt nakti"</div>--}}
+{{--                    </div>--}}
+{{--                </a>--}}
+{{--            </li>--}}
+{{--            <li>--}}
+{{--                <a href="#" class="block items-center p-3 sm:flex hover:bg-gray-100 dark:hover:bg-gray-700">--}}
+{{--                    <div class="text-gray-600 dark:text-gray-400">--}}
+{{--                        <div class="text-base font-medium text-gray-900"> Susitikimas su Marta Saulėgraža 10:20</div>--}}
+{{--                        <div class="text-sm font-normal">"Sakauda nugara, negaliu užmigt nakti"</div>--}}
+{{--                    </div>--}}
+{{--                </a>--}}
+{{--            </li>--}}
+
+            <li>
+                <div class="text-gray-600 dark:text-gray-400">
+                    <div class="w-full text-base text-lg font-medium text-gray-900 mx-auto">Neturite jokių rezervacijų šiai dienai</div>
+                </div>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div id="backdrop" class="hidden bg-gray-900 bg-opacity-50 dark:bg-opacity-80 fixed inset-0 z-30"></div>
 <x-navbar/>
 
-<div id="authentication-modal" tabindex="-1" aria-hidden="true"
+
+<div id="authentication-modal" tabindex="-1" aria-hidden="false"
      class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center">
     <div class="relative p-4 w-full max-w-md h-full md:h-auto">
 
@@ -80,12 +138,13 @@
     </div>
 </div>
 
+
 <div class="w-full h-72 bg-gradient-to-r from-[#40AACA] to-[#35BCA3] flex items-center justify-center">
-    <h1 class="text-white text-5xl -mt-28">Mano Profilis</h1>
+    <h1 class="text-white text-5xl -mt-28">Daktaro skydelis</h1>
 </div>
 
 
-<div class="container sm:w-[600px] md:w-[900px] w-[450px] mx-auto -mt-28 px-10 py-5 bg-white rounded-lg shadow-md">
+<div class="container mx-auto w-[95%] -mt-28 px-10 py-5 bg-white rounded-lg shadow-md">
     <div class="flex flex-col">
 
         <div class="border-b border-gray-200 dark:border-gray-700">
@@ -101,7 +160,7 @@
                                   d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
                                   clip-rule="evenodd"></path>
                         </svg>
-                        Profilis
+                        Rezervacijos
                     </a>
                 </li>
                 <li id="visit_tab" class="mr-2">
@@ -113,7 +172,7 @@
                             <path
                                 d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                         </svg>
-                        Vizitai
+                        Pacientai
                     </a>
                 </li>
                 <li id="medicine_tab" class="mr-2">
@@ -135,56 +194,56 @@
             <div class="w-full flex justify-center">
                 <h1 class="mt-1 text-3xl font-semibold text-[#35BCA3] mx-auto">Redaguoti Profili</h1>
             </div>
-            <div class="flex mx-auto mt-5 w-full">
 
-                <form method="POST" class=" w-full" action="/profile/update">
-                    @csrf
-                    <div class="flex sm:flex-row flex-col mb-6 justify-center gap-3">
-                        <div class="sm:w-1/2">
-                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vardas</label>
-                            <input type="text" id="name" name="name" value="{{$user->name}}"
-                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                   placeholder="Vardas Pavardenis" required>
+            <div class="w-full text-[#eee] flex justify-center content-center">
+                <div class="w-[45rem] bg-gray-100 shadow-md">
+                    <div
+                        class="w-full h-[12rem] bg-gradient-to-r from-[#40AACA] to-[#35BCA3] flex justify-between content-center py-[2rem] text-center shadow-md rounded-lg">
+                        <i class="fas fa-angle-left prev text-[2.5rem] cursor-pointer my-auto ml-3"></i>
+                        <div class="date">
+                            <h1 class="text-[3rem] font-semibold mb-[0.5rem]"></h1>
+                            <p class="text-[1.5rem]"></p>
                         </div>
-                        <div class="sm:w-1/2">
-                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Pavardė</label>
-                            <input type="text" id="name" name="lastname" value="{{$user->lastname}}"
-                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                   placeholder="Vardas Pavardenis" required>
+                        <i class="fas fa-angle-right next text-[2.5rem] cursor-pointer my-auto mr-3"></i>
+                    </div>
+                    <div class="w-full flex content-center bg-gray-200 pl-1">
+                        <div
+                            class="text-[1.4rem] m-[0.3rem] w-[calc(40.2rem_/_7)] h-[5rem] flex justify-center items-center shadow-md bg-gradient-to-r from-[#40AACA] to-[#35BCA3] rounded-lg">
+                            Sek
+                        </div>
+                        <div
+                            class="text-[1.4rem] m-[0.3rem] w-[calc(40.2rem_/_7)] h-[5rem] flex justify-center items-center shadow-md bg-gradient-to-r from-[#40AACA] to-[#35BCA3] rounded-lg">
+                            Pir
+                        </div>
+                        <div
+                            class="text-[1.4rem] m-[0.3rem] w-[calc(40.2rem_/_7)] h-[5rem] flex justify-center items-center shadow-md bg-gradient-to-r from-[#40AACA] to-[#35BCA3] rounded-lg">
+                            Ant
+                        </div>
+                        <div
+                            class="text-[1.4rem] m-[0.3rem] w-[calc(40.2rem_/_7)] h-[5rem] flex justify-center items-center shadow-md bg-gradient-to-r from-[#40AACA] to-[#35BCA3] rounded-lg">
+                            Tre
+                        </div>
+                        <div
+                            class="text-[1.4rem] m-[0.3rem] w-[calc(40.2rem_/_7)] h-[5rem] flex justify-center items-center shadow-md bg-gradient-to-r from-[#40AACA] to-[#35BCA3] rounded-lg">
+                            Ket
+                        </div>
+                        <div
+                            class="text-[1.4rem] m-[0.3rem] w-[calc(40.2rem_/_7)] h-[5rem] flex justify-center items-center shadow-md bg-gradient-to-r from-[#40AACA] to-[#35BCA3] rounded-lg">
+                            Pen
+                        </div>
+                        <div
+                            class="text-[1.4rem] m-[0.3rem] w-[calc(40.2rem_/_7)] h-[5rem] flex justify-center items-center shadow-md bg-gradient-to-r from-[#40AACA] to-[#35BCA3] rounded-lg">
+                            Šes
                         </div>
                     </div>
-                    <div class="mb-6">
-                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">El.
-                            p. adresas</label>
-                        <input type="email" id="email" name="email" value="{{$user->email}}"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                               placeholder="name@flowbite.com" required>
-                    </div>
-                    <div class="mb-6">
-                        <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Telefonas</label>
-                        <input type="text" id="phone" name="phone" value="{{$user->phone}}"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                               placeholder="name@flowbite.com" required>
-                    </div>
-
-                    <div class="mb-6">
-                        <a type="button" data-type="edit" data-modal-toggle="authentication-modal" href="#"
-                           class="font-medium text-[#35BCA3] dark:text-[#35BCA3] hover:underline">Norite pasikeisti
-                            slaptažodi?</a>
-                    </div>
-
-                    <button type="submit"
-                            class="transition text-white border-[#35BCA3] bg-[#35BCA3] border-[2px] hover:bg-white hover:text-[#35BCA3] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Redaguoti Profili
-                    </button>
-
-                    <x-auth-validation-errors class="mt-4" :errors="$errors"/>
-
-                </form>
-
-
+                    <div class="w-full flex flex-wrap p-[0.2rem] days rounded-b-l bg-gray-200"></div>
+                </div>
             </div>
+            <!-- drawer component -->
+
+
         </div>
+
 
         <div id="visit_content" class="mt-5 w-full hidden">
             <div class="w-full flex justify-center flex-col">
@@ -337,7 +396,8 @@
         <h3 class="text-lg font-medium text-green-700 dark:text-green-800">Rezervuotis pas gydytoją</h3>
     </div>
     <div class="mt-2 mb-4 text-sm text-green-700 dark:text-green-800">
-        Norėdami užsirezervuoti vizitą pas gydytoją turiti nueiti i gydytojų puslapį ir jame isirinkti jums tinkamą specialistą.
+        Norėdami užsirezervuoti vizitą pas gydytoją turiti nueiti i gydytojų puslapį ir jame isirinkti jums tinkamą
+        specialistą.
     </div>
     <div class="flex">
         <button type="button"
@@ -446,5 +506,9 @@
 
 </body>
 <script src="{{ asset('js/userProfile.js')}}"></script>
+<script src="{{ asset('js/calendar.js')}}"></script>
+
+<script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+
 
 </html>
