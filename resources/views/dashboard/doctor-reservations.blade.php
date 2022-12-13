@@ -21,72 +21,7 @@
 <div class="h-screen flex">
     @include('dashboard.components.sidebar')
 
-    <div id="authentication-modal" tabindex="-1" aria-hidden="true"
-         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center">
-        <div class="relative p-4 w-full max-w-md h-full md:h-auto">
 
-            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                <button type="button"
-                        class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
-                        data-modal-toggle="authentication-modal">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                              clip-rule="evenodd"></path>
-                    </svg>
-                </button>
-                <div class="py-6 px-6 lg:px-8">
-                    <h3 id="form-label" class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Sukurti naują
-                        vartotoja</h3>
-                    <form method="POST" id="form-user" class="space-y-6" action="#">
-                        @csrf
-                        <div>
-                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vardas</label>
-                            <input type="text" name="name" id="form-name"
-                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                   placeholder="Vardas" required="">
-                        </div>
-                        <div>
-                            <label for="lastname"
-                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Pavardė</label>
-                            <input type="text" name="lastname" id="form-lastname"
-                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                   placeholder="Pavardė" required="">
-                        </div>
-                        <div>
-                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Paštas</label>
-                            <input type="email" name="email" id="form-email"
-                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                   placeholder="test@test.com" required="">
-                        </div>
-                        <div>
-                            <label for="role_id"
-                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Role</label>
-                            <select id="form-role" name="role_id"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                @foreach($roles as $role)
-{{--                                    @if($role->name != 'doctor')--}}
-                                        <option value="{{$role->id}}">{{$role->name}}</option>
-{{--                                    @endif--}}
-                                @endforeach
-                            </select>
-                        </div>
-                        <div id="form-password-control">
-                            <label for="password"
-                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Slaptažodis</label>
-                            <input type="password" name="password" id="form-password"
-                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                   placeholder="********" required="">
-                        </div>
-                        <button type="submit" id="form-button"
-                                class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Sukurti vartotoja
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div id="popup-modal" tabindex="-1"
          class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full">
@@ -111,7 +46,6 @@
                         norite trinti Lukas Martinkus [ID: 1]</h3>
                     <form method="POST" id="delete-form" action="#">
                         @csrf
-                        @method('DELETE')
                         <button data-modal-toggle="popup-modal" type="submit"
                                 class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                             Naikinti
@@ -127,7 +61,7 @@
     </div>
 
     <div id="main" class="w-full overflow-auto bg-gray-100 h-screen p-10">
-        <h1 class="font-bold text-3xl">Vartotojai</h1>
+        <h1 class="font-bold text-3xl">Rezervacijos [{{$doctor->user->name}} {{$doctor->user->lastname}}]</h1>
         <div class="flex mt-3 justify-between">
             <div class="flex w-1/3">
                   <span
@@ -138,11 +72,7 @@
                        class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                        placeholder="jonas@gmail.com">
             </div>
-            <button data-type="new"
-                    class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    type="button" data-modal-toggle="authentication-modal">
-                Sukurti naują vartotoją
-            </button>
+
         </div>
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table id="myTable" class="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-4">
@@ -152,16 +82,19 @@
                         ID
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Vardas
+                        Statusas
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Paštas
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Identifikacija
+                        Vardas
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        <span class="sr-only">Redaguoti</span>
+                        Data
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        <span class="sr-only">Atlaisvinti</span>
                     </th>
                     <th scope="col" class="px-6 py-3">
                         <span class="sr-only">Naikinti</span>
@@ -169,27 +102,31 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($users as $user)
+                @foreach($reservations as $reservation)
                     <tr class="border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700">
                         <th scope="row"
-                            class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">{{$user->id}}</th>
-                        <td id="name-{{$user->id}}" class="px-6 py-4">
-                            {{$user->name}} {{$user->lastname}}
+                            class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">{{$reservation->id}}</th>
+                        <td id="role-{{$reservation->id}}" class="px-6 py-4 font-semibold {{$reservation->user ? "text-red-500" : "text-green-500"}}">
+                            {{$reservation->user ? "Užimtas" : "Laisvas"}}
                         </td>
-                        <td id="email-{{$user->id}}" class="px-6 py-4">
-                            {{$user->email}}
+
+                        <td id="email-{{$reservation->id}}" class="px-6 py-4">
+                            {{$reservation->user->email ?? "Nėra"}}
                         </td>
-                        <td id="role-{{$user->id}}" class="px-6 py-4">
-                            {{$user->role->name}}
+                        <td id="name-{{$reservation->id}}" class="px-6 py-4">
+                            {{$reservation->user->name ?? "Nėra"}} {{$reservation->user->lastname ?? ""}}
+                        </td>
+                        <td id="date-{{$reservation->id}}" class="px-6 py-4">
+                            {{$reservation->date ?? "Nėra"}}
                         </td>
                         <td class="px-6 py-4">
-                            <a type="button" data-type="edit" data-modal-toggle="authentication-modal" href="#"
-                               data-id="{{$user->id}}"
-                               class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Redaguoti</a>
+                            <a type="button" data-type="edit" data-modal-toggle="popup-modal" href="#"
+                               data-id="{{$reservation->id}}"
+                               class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Atlaisvinti</a>
                         </td>
                         <td class="px-6 py-4 text-right">
                             <a href="#" data-type="delete" type="button" data-modal-toggle="popup-modal"
-                               data-id="{{$user->id}}"
+                               data-id="{{$reservation->id}}"
                                class="font-medium text-red-500 dark:text-red-500 hover:underline">Naikinti</a>
                         </td>
                     </tr>
@@ -240,38 +177,17 @@
         if (element.nodeName === 'A') {
             if (element.dataset.type === 'edit') {
                 let id = element.dataset.id;
-                let stringName = document.getElementById(`name-${id}`).innerHTML.trim()
-                let nameArray = stringName.split(' ');
-                let email = document.getElementById(`email-${id}`).innerHTML.trim()
-                let role = document.getElementById(`role-${id}`).innerHTML.trim()
-                form.action = `/dashboard/users/edit/${id}`
-                formName.value = nameArray[0];
-                formLastname.value = nameArray[1];
-                formEmail.value = email;
-                formRole.value = role;
-                formLabel.innerHTML = `Redaguoti ${stringName}`;
-                formButton.innerHTML = 'Redaguoti vartotoją'
-                passwordControl.innerHTML = '';
-                switch (role) {
-                    case 'user':
-                        formRole.value = '1';
-                        break;
-                    case 'doctor':
-                        formRole.value = '2';
-                        break;
-                    case 'admin':
-                        formRole.value = '3';
-                        break;
-                }
+                deleteForm.action = `/dashboard/doctor/reservation/reset/${id}`;
+                deleteLabel.innerHTML = `Ar tikrai norite trinti atlaisvinti rezervacija [ID: ${id}]`;
             }
-            if (element.dataset.type === 'delete') {
-                let id = element.dataset.id;
-                let name = document.getElementById(`name-${id}`).innerHTML.trim()
-                deleteForm.action = `/dashboard/users/delete/${id}`;
-                deleteLabel.innerHTML = `Ar tikrai norite trinti ${name} [ID: ${id}]`;
-            }
-
         }
+        if (element.dataset.type === 'delete') {
+            let id = element.dataset.id;
+            deleteForm.action = `/dashboard/doctor/reservation/delete/${id}`;
+            deleteLabel.innerHTML = `Ar tikrai norite trinti rezervacija [ID: ${id}]`;
+        }
+
+
     }
 
     function myFunction() {

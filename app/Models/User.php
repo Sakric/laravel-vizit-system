@@ -48,4 +48,8 @@ class User extends Authenticatable
     public function role(){
         return $this->belongsTo(Role::class, 'role_id');
     }
+
+    public function medicines(){
+        return $this->belongsToMany(Medicine::class, 'medicine_user', 'user_id', 'medicine_id')->withPivot('id', 'created_at');
+    }
 }

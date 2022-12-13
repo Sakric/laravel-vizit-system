@@ -5,7 +5,7 @@
 {{--                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />--}}
 {{--            </a>--}}
 {{--        </x-slot>--}}
-        <h1 class="flex justify-center mb-2 font-bold text-2xl">Registracija</h1>
+        <h1 class="flex justify-center mb-2 font-bold text-2xl text-[#35BCA3]">Registracija</h1>
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
@@ -59,14 +59,20 @@
                                 name="password_confirmation" required />
             </div>
 
-            <div class="flex items-center justify-end mt-4">
+            <div class="mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
                     {{ __('Jau turite paskyrą?') }}
                 </a>
+            </div>
 
-                <x-button class="ml-4">
-                    {{ __('Register') }}
+            <div class="flex items-center mt-4">
+
+                <x-button class="">
+                    {{ __('Registruotis') }}
                 </x-button>
+
+
+
             </div>
         </form>
     </x-auth-card>

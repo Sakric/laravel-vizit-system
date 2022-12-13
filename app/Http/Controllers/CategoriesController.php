@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
+    public function open()
+    {
+        return view('dashboard.categories', [
+            'categories' => Category::all()
+        ]);
+    }
+
     public function store(Category $category)
     {
         $attributes = request()->validate([

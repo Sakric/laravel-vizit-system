@@ -24,37 +24,27 @@
     @include('dashboard.components.sidebar')
 
     <div id="main" class="w-full overflow-auto bg-gray-100 h-screen p-10">
-        <h1 class="font-bold text-3xl">Sukurti daktarą [{{$user->name}} {{$user->lastname}}]</h1>
+        <h1 class="font-bold text-3xl">Sukurti naują puslapį</h1>
 
 
         <div class="flex justify-center align-middle h-screen items-center">
             <div class="w-full m-auto mt-6 px-6 py-4 bg-white shadow-md overflow-hidden rounded-lg">
-                <form method="POST" action="/dashboard/doctors/create" enctype="multipart/form-data">
+                <form method="POST" action="/dashboard/pages/create" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="user_id" value="{{$user->id}}">
                     <div class="mb-6">
-                        <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Kategorija</label>
-                        <select id="form-role" name="category_id"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            @foreach($categories as $category)
-                                    <option value="{{$category->id}}">{{$category->name}}</option>
-                            @endforeach
-                        </select>
+                        <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Pavadinimas</label>
+                        <input type="text" id="name" name="name"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="Vardas Pavardenis" required>
                     </div>
                     <div class="mb-6">
-                        <label for="body" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Darbo patirtis</label>
+                        <label for="body" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Puslapio turinys</label>
                         <textarea name="body" rows="2"
                                   class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                   placeholder="Iveskite teksta"></textarea>
                     </div>
                     <div class="mb-6">
-                        <label for="work_time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Darbo laikas</label>
-                        <textarea name="work_time" rows="2"
-                                  class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                  placeholder="Iveskite teksta"></textarea>
-                    </div>
-                    <div class="mb-6">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="user_avatar">Daktaro nuotrauka</label>
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" for="user_avatar">Puslapio nuotrauka</label>
                         <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" name="thumbnail" aria-describedby="user_avatar_help" id="user_avatar" type="file">
                     </div>
                     <button type="submit"

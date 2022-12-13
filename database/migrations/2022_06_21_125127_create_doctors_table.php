@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('category_id');
             $table->text('body');
+            $table->text('work_time');
             $table->string('thumbnail')->nullable();
             $table->timestamps();
         });

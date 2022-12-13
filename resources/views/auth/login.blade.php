@@ -10,7 +10,7 @@
 {{--            </a>--}}
 {{--        </x-slot>--}}
 
-        <h1 class="flex justify-center mb-2 font-bold text-2xl">Prisijungti</h1>
+        <h1 class="flex justify-center mb-2 font-bold text-2xl text-[#35BCA3]">Prisijungti</h1>
 
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -53,7 +53,13 @@
 {{--                        {{ __('Forgot your password?') }}--}}
 {{--                    </a>--}}
 {{--                @endif--}}
+            <div class="mt-4">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
+                    {{ __('Neturite paskyros?') }}
+                </a>
+            </div>
 
+            <div>
                 <x-button class="mt-4">
                     {{ __('Prisijungti') }}
                 </x-button>

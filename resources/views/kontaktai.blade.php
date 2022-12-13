@@ -27,114 +27,110 @@
 <body>
 <x-navbar/>
 
-<div id="authentication-modal" tabindex="-1" aria-hidden="true"
-     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center">
-    <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <button type="button"
-                    class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
-                    data-modal-toggle="authentication-modal">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                          clip-rule="evenodd"></path>
-                </svg>
-            </button>
-            <div class="py-6 px-6 lg:px-8">
-                <h3 id="form-label" class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Pakeisti slaptažodį</h3>
-                <form method="POST" id="form-user" class="space-y-6" action="/profile/update/password">
-                    @csrf
-                    <div>
-                        <label for="password"
-                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Senas slaptažodis</label>
-                        <input type="password" name="oldPassword"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                               placeholder="********" required="">
-                    </div>
-                    <div>
-                        <label for="password"
-                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Naujas slaptažodis</label>
-                        <input type="password" name="password"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                               placeholder="********" required="">
-                    </div>
-                    <div>
-                        <label for="password"
-                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Pakartokite naują slaptaždį</label>
-                        <input type="password" name="password_confirmation"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                               placeholder="********" required="">
-                    </div>
-                    <button type="submit" id="form-button"
-                            class="transition text-white border-[#35BCA3] bg-[#35BCA3] border-[2px] hover:bg-white hover:text-[#35BCA3] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Pakeisti slaptažodį
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="w-full h-72 bg-gradient-to-r from-[#40AACA] to-[#35BCA3] flex items-center justify-center">
-    <h1 class="text-white text-5xl -mt-28">Mano Profilis</h1>
+    <h1 class="text-white text-5xl -mt-28">Kontaktai</h1>
 </div>
 
 
-<div class="container sm:w-[600px] md:w-[900px] w-[400px] mx-auto -mt-28 px-10 py-5 bg-white rounded-lg shadow-md">
-    <div class="flex flex-col mt-5">
-        <h1 class="mt-1 text-3xl font-semibold text-[#35BCA3] mx-auto">Redaguoti Profili</h1>
+<div class="container sm:w-[600px] md:w-[900px] w-[450px] mx-auto -mt-28 px-10 py-5 bg-white rounded-lg shadow-md">
+    <div class="flex flex-col">
+        <div class="w-full flex justify-center">
+            <h1 class="mt-1 text-3xl font-semibold text-[#35BCA3] mx-auto">Susiekite su mumis</h1>
+        </div>
+
         <div class="flex mx-auto mt-5 w-full">
-            <form method="POST" class=" w-full" action="/profile/update">
+
+            <form method="POST" class=" w-full" action="/kontaktai-send">
                 @csrf
                 <div class="flex sm:flex-row flex-col mb-6 justify-center gap-3">
                     <div class="sm:w-1/2">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vardas</label>
-                        <input type="text" id="name" name="name" value="{{$user->name}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Vardas Pavardenis" required>
+                        <label for="name"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vardas</label>
+                        <input type="text" id="name" name="name" value="{{auth()->check() ? auth()->user()->name : ''}}"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="Jonas" required>
                     </div>
                     <div class="sm:w-1/2">
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Pavardė</label>
-                        <input type="text" id="name" name="lastname" value="{{$user->lastname}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Vardas Pavardenis" required>
+                        <input type="text" id="name" name="lastname" value="{{auth()->check() ? auth()->user()->lastname : ''}}"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="Jonaitis" required>
                     </div>
                 </div>
-                <div class="mb-6">
-                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">El. p. adresas</label>
-                    <input type="email" id="email" name="email" value="{{$user->email}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required>
-                </div>
-                <div class="mb-6">
-                    <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Telefonas</label>
-                    <input type="text" id="phone" name="phone" value="{{$user->phone}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required>
+                <div class="flex sm:flex-row flex-col mb-6 justify-center gap-3">
+                    <div class="sm:w-1/2">
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">El.
+                            p. adresas</label>
+                        <input type="email" id="email" name="email" value="{{auth()->check() ? auth()->user()->email : ''}}"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="jonas@paštas.lt" required>
+                    </div>
+                    <div class="sm:w-1/2">
+                        <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Telefonas</label>
+                        <input type="text" id="phone" name="phone" value="{{auth()->check() ? auth()->user()->phone : ''}}"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="+370 000 00 000" required>
+                    </div>
                 </div>
 
                 <div class="mb-6">
-                    <a type="button" data-type="edit" data-modal-toggle="authentication-modal" href="#"
-                       class="font-medium text-[#35BCA3] dark:text-[#35BCA3] hover:underline">Norite pasikeisti slaptažodi?</a>
+                    <label for="subject" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tema</label>
+                    <input type="subject" id="subject" name="subject" value=""
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           placeholder="Tema..." required>
                 </div>
 
-                <button type="submit" class="transition text-white border-[#35BCA3] bg-[#35BCA3] border-[2px] hover:bg-white hover:text-[#35BCA3] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Redaguoti Profili</button>
+                <div class="mb-6">
+                <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Žinutė</label>
+                <textarea id="message" name="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Palikite savo žinutę"></textarea>
+                </div>
 
-                <x-auth-validation-errors class="mt-4" :errors="$errors" />
+
+                <button type="submit"
+                        class="transition text-white border-[#35BCA3] bg-[#35BCA3] border-[2px] hover:bg-white hover:text-[#35BCA3] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Siųsti žinutę
+                </button>
+
+                <x-auth-validation-errors class="mt-4" :errors="$errors"/>
 
             </form>
 
 
         </div>
+
+
     </div>
 </div>
 
-<div id="alert-additional-content-3" class="container p-4 mb-4 border border-green-300 rounded-lg bg-green-50 dark:bg-green-200 sm:w-[600px] md:w-[900px] w-[400px] mt-5 mx-auto" role="alert">
+<div id="alert-additional-content-3"
+     class="container p-4 mb-4 border border-green-300 rounded-lg bg-green-50 dark:bg-green-200 sm:w-[600px] md:w-[900px] w-[400px] mt-5 mx-auto"
+     role="alert">
     <div class="flex items-center">
-        <svg aria-hidden="true" class="w-5 h-5 mr-2 text-green-700 dark:text-green-800" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+        <svg aria-hidden="true" class="w-5 h-5 mr-2 text-green-700 dark:text-green-800" fill="currentColor"
+             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                  clip-rule="evenodd"></path>
+        </svg>
         <span class="sr-only">Info</span>
-        <h3 class="text-lg font-medium text-green-700 dark:text-green-800">Peržiurėti savo rezervacijas</h3>
+        <h3 class="text-lg font-medium text-green-700 dark:text-green-800">Rezervuotis pas gydytoją</h3>
     </div>
     <div class="mt-2 mb-4 text-sm text-green-700 dark:text-green-800">
-        Paspaudę žemiau peržiūrėti mygtuka busite nurkeipti i savo rezervaciju puslapį. Jame galite peržiurėti visas savo turimas rezervcijas.
+        Norėdami užsirezervuoti vizitą pas gydytoją turiti nueiti i gydytojų puslapį ir jame isirinkti jums tinkamą
+        specialistą.
     </div>
     <div class="flex">
-        <button type="button" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs px-3 py-1.5 mr-2 text-center inline-flex items-center dark:bg-green-800 dark:hover:bg-green-900">
-            <svg aria-hidden="true" class="-ml-0.5 mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
-            Peržiūrėti
+        <button type="button"
+                class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs px-3 py-1.5 mr-2 text-center inline-flex items-center dark:bg-green-800 dark:hover:bg-green-900">
+            <svg aria-hidden="true" class="-ml-0.5 mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                <path fill-rule="evenodd"
+                      d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                      clip-rule="evenodd"></path>
+            </svg>
+            Peržiūrėti gydytojus
         </button>
     </div>
 </div>
@@ -231,6 +227,4 @@
 
 </body>
 
-<script>
-</script>
 </html>

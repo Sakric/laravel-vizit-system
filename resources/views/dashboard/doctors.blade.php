@@ -146,6 +146,10 @@
                            class="mt-2 inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700  transition rounded-lg bg-teal-600 hover:bg-white border-[1px] border-teal-600 hover:text-teal-600 text-white dark:bg-teal-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             Paslaugos
                         </a>
+                        <a href="/dashboard/doctors/reservations/{{$doctor->id}}" type="button"
+                           class="mt-2 inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-purple-700  transition rounded-lg bg-purple-700 hover:bg-white border-[1px] border-purple-700 hover:text-purple-700 text-white dark:bg-teal-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
+                            Rezervacijos
+                        </a>
                     </div>
                 </div>
 
@@ -167,9 +171,9 @@
     let formStore = document.getElementById(`form-store`);
     const deleteLabel = document.getElementById('delete-label');
     const deleteForm = document.getElementById('delete-form');
+
     search.addEventListener('keyup', function (e) {
         callAPI(search.value)
-
     });
     const callAPI = async function (value) {
         try {
@@ -185,7 +189,6 @@
                         test.insertAdjacentHTML('beforeend', markup);
                     }
                 });
-                console.log(data);
             } else {
                 test.innerHTML = '';
             }

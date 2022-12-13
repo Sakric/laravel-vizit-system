@@ -12,9 +12,10 @@
         <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
         <script src="https://cdn.tailwindcss.com"></script>
 
+
         <link
             rel="stylesheet"
-            href="https://unpkg.com/swiper/swiper-bundle.min.css"
+            href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
         />
 
         <title>Laravel</title>
@@ -32,7 +33,31 @@
 
 
     <div class="container mx-auto w-[95%] -mt-28 px-10 py-5 bg-white rounded-lg shadow-md">
-        <p> <a class="text-[#35BCA3] hover:text-[#40AACA]" href="/doctors">Gydytojai</a> > {{$doctor->user->name}} {{$doctor->user->lastname}} </p>
+
+
+        <nav class="flex" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="/" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-[#35BCA3] dark:text-gray-400 dark:hover:text-white">
+                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+                        Pagrindinis
+                    </a>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                        <a href="/doctors" class="ml-1 text-sm font-medium text-gray-700 hover:text-[#35BCA3] md:ml-2 dark:text-gray-400 dark:hover:text-white">Gydytojai</a>
+                    </div>
+                </li>
+                <li aria-current="page">
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                        <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">{{$doctor->user->name}} {{$doctor->user->lastname}}</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+
 
         <h1 class="text-2xl mt-4 font-light">{{$doctor->category->name}}</h1>
 
@@ -44,12 +69,10 @@
             </div>
             <div class="flex w-1/3 flex-col" >
                 <img style="width: 380px; height: 550px" class="rounded-lg" src="/storage/{{$doctor->thumbnail}}" alt="{{$doctor->name}}" />
+
                 <h1 class="mt-5 text-2xl font-semibold text-[#35BCA3]">Gydytojo darbo laikas</h1>
                 <div class="flex flex-col mt-2">
-                    <p>Neporinėmis mėn. diemonis:</p>
-                    <p>I-V 15:00 val. - 18:00 val.</p>
-                    <p>Porinėmis mėn. diemonis:</p>
-                    <p>I-V 8:00 val. - 11:00 val.</p>
+                    {!! $doctor->work_time !!}
                 </div>
             </div>
         </div>
@@ -143,7 +166,7 @@
 
         </div>
         <!-- Swiper JS -->
-        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 
         <!-- Initialize Swiper -->
         <script>
@@ -259,7 +282,8 @@
                     throw err;
                 }
             }
-            callAPI(1)
+
+            callAPI({{$doctor->id}})
 
 
         </script>
@@ -343,6 +367,8 @@
 
     </body>
 
+
 <script>
+
 </script>
 </html>

@@ -319,6 +319,42 @@
             <div class="w-full flex justify-center">
                 <h1 class="mt-1 text-3xl font-semibold text-[#35BCA3] mx-auto">Mano Vaistai</h1>
             </div>
+
+            <div class="overflow-x-auto relative shadow-md sm:rounded-lg mt-5">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="py-3 px-6">
+                            ID
+                        </th>
+                        <th scope="col" class="py-3 px-6">
+                            Pavadinimas
+                        </th>
+                        <th scope="col" class="py-3 px-6">
+                            Išrašyta
+                        </th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    @foreach($user->medicines as $medicine)
+                        <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                            <th scope="row"
+                                class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{$medicine->id}}
+                            </th>
+                            <td class="py-4 px-6">
+                                {{$medicine->name}}
+                            </td>
+                            <td class="py-4 px-6">
+                                {{$medicine->pivot->created_at}}
+                            </td>
+                    @endforeach
+
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </div>
 </div>
@@ -442,6 +478,8 @@
         </div>
     </div>
 </footer>
+
+
 
 
 </body>

@@ -4,11 +4,19 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
         <script src="https://kit.fontawesome.com/e5248e6090.js" crossorigin="anonymous"></script>
 
 
         <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
         <script src="https://cdn.tailwindcss.com"></script>
+
+
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+        />
 
         <title>Laravel</title>
 
@@ -20,50 +28,45 @@
     <body>
     <x-navbar/>
 
-    <div class="w-full h-52 bg-gradient-to-r from-[#40AACA] to-[#35BCA3] flex items-center justify-center">
-        <h1 class="text-5xl text-white font-bold">Gydytojai</h1>
+    <div class="w-full h-72 bg-gradient-to-r from-[#40AACA] to-[#35BCA3] flex items-center justify-center">
     </div>
 
 
-    <div class="container mx-auto p-5">
+    <div class="container mx-auto w-[95%] -mt-28 px-10 py-5 bg-white rounded-lg shadow-md">
 
-        <h1 class="text-3xl mt-4 text-[#35BCA3] font-semibold">Mūsų specialistai</h1>
-
-        <div class="flex justify-center w-full mt-10">
-            <ul id="filter" class="flex items-center flex-wrap justify-center gap-3">
-                <li class="px-4 py-3 bg-gray-200 rounded-full text-xl cursor-pointer" data-filter="all">Visi specialistai</li>
-            @foreach($categories as $category)
-                    <li class="px-4 py-3 bg-gray-200 rounded-full text-xl cursor-pointer hover:bg-[#35BCA3] hover:text-white" data-filter="{{$category->name}}">{{$category->name}}</li>
-                @endforeach
-            </ul>
-        </div>
-
-        <div id="doctors" class="w-full flex flex-wrap mt-10 min-h-fit gap-8">
-            @foreach($doctors as $doctor)
-            <div class="w-80 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700" data-category="{{$doctor->category->name}}">
-                <a href="/doctors/{{$doctor->id}}">
-                    <img class="rounded-t-lg" src="/storage/{{$doctor->thumbnail}}" alt="{{$doctor->name}}" />
-                </a>
-                <div class="p-5">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{$doctor->user->name}} {{$doctor->user->lastname}}</h5>
+        <nav class="flex mb-5" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="/" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+                        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+                        Pagrindinis
                     </a>
-                    <p class="mb-3 font-normal text-gray-700 text-xl">{{$doctor->category->name}}</p>
-                    <a href="/doctors/{{$doctor->id}}" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white text-white border-[#35BCA3] bg-[#35BCA3] border-[2px] hover:bg-white hover:text-[#35BCA3] rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Peržiurėti
-                        <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    </a>
-                </div>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                        <a href="#" class="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">{{$page->name}}</a>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+
+        <h2 class="text-3xl mb-5">{{$page->name}}</h2>
+        <div class="flex justify-around w-full">
+            <div class="w-1/2 text-lg">
+                <p class="">{!! $page->body !!}</p>
             </div>
-            @endforeach
+            <div class="w-1/2">
+                <img class="rounded-lg" src="/storage/{{$page->thumbnail }}" alt="{{$page->name}}">
 
-
-        </div>
-
-        <div id="none" class="flex justify-center w-full h-64 hidden">
-            <h1 class="font-bold text-3xl">Šio metu nėra gydytojų tokiai kategorijai.</h1>
+            </div>
         </div>
     </div>
+
+
+
+
+
 
 
     <footer class="p-4 bg-gray-100 mt-10 sm:p-6 dark:bg-gray-800">
@@ -134,58 +137,10 @@
         </div>
     </footer>
 
-
     </body>
 
+
 <script>
-    const container = document.querySelector("body");
-    const filter = document.getElementById('filter').children;
-    const doctors = document.getElementById('doctors').children;
-    const notFound = document.getElementById('none');
-    container.onclick = function (event) {
-        // Prevent default behavior of button
 
-        // Store Target Element In Variable
-        const element = event.target;
-
-
-        // If Target Element Is a Button
-        if (element.nodeName === 'LI') {
-
-            const category = element.dataset.filter;
-            Array.from(filter).forEach(e => {
-                e.classList.remove('bg-[#35BCA2]')
-                e.classList.remove('text-white')
-            });
-            element.classList.add('bg-[#35BCA2]')
-            element.classList.add('text-white')
-
-            if(!notFound.classList.contains('hidden')) {
-                notFound.classList.add('hidden');
-            }
-            let test = 0;
-            Array.from(doctors).forEach(d =>{
-                if(category === 'all'){
-                    test++;
-                    if(d.classList.contains('hidden')){
-                        d.classList.remove('hidden')
-                    }
-                } else {
-                    if (d.dataset.category === category) {
-                        test++;
-                        if (d.classList.contains('hidden')) {
-                            d.classList.remove('hidden')
-                        }
-                    } else {
-                        if (!d.classList.contains('hidden')) {
-                            d.classList.add('hidden')
-                        }
-                    }
-                }
-            });
-            console.log(test);
-            if(test === 0) notFound.classList.remove('hidden');
-        }
-    }
 </script>
 </html>

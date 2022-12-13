@@ -55,64 +55,75 @@ $value_time = ucfirst(strftime("%H:%M", mktime($h, $m, 0, $c, $b, $a)));
                     class="px-3 border-[1px] rounded-full">{{$reservation->doctor->category->name}}</h1></div>
             <hr class="mt-2">
             <div class="px-3 border-[1.5px] rounded-lg mt-2">
-                <div class="flex flex-col px-10 py-3">
+                <div class="flex flex-col px-3 py-3">
                     <h1 class="text-[#35BCA3] text-xl font-semibold">{{$value_date}} d.</h1>
                     <h1 class="">{{$value_time}} val.</h1>
-                    <div class="flex w-44 px-2 bg-[#FF0000] py-2 rounded-lg">
-                        <p class="text-white text-center mx-auto my-auto leading-none">Ši gydytojo paslauga yra mokama</p>
-                    </div>
                 </div>
             </div>
             <div class="px-3 border-[1.5px] rounded-lg mt-2">
-                <div class="flex flex-col px-10 py-3">
-                    <h1 class="text-[#35BCA3] text-xl font-semibold">INGOS GRUZDIENĖS PRIVATI KLINIKA KLAIPĖDOJE </h1>
-                    <h1 class="">Liepų g. 36, Klaipėda</h1>
+                <div class="flex flex-col px-3 py-3">
+                    <h1 class="text-[#35BCA3] text-xl font-semibold">Poliklinikos pavadinimas</h1>
+                    <h1 class="">Adresas</h1>
                 </div>
             </div>
             <hr class="mt-2">
-            <button class="transition bg-gray-400 hover:bg-white border-[1px] border-gray-400 hover:text-gray-400 text-white rounded-full w-44 py-1 mx-auto mt-3 font-semibold">
+            <button
+                class="transition bg-gray-400 hover:bg-white border-[1px] border-gray-400 hover:text-gray-400 text-white rounded-full w-44 py-1 mx-auto mt-3 font-semibold">
                 Keisti pasirinkimą
             </button>
-            <p class="mx-auto text-sm mt-4">Galite pakeisti vizito datą, arba gydytoją.</p>
+            <p class="mx-auto text-sm mt-4 text-center">Galite pakeisti vizito datą, arba gydytoją.</p>
         </div>
 
         <div class="flex flex-col w-full">
 
             <h1 class="mt-5 text-3xl font-semibold text-[#35BCA3] mx-auto">Jūsų duomenys</h1>
             <div class="flex flex-col mt-2 mx-auto w-full">
-                <form method="POST" class="space-y-6" action="/doctors/reservation/set/{{$reservation->doctor->id}}/{{$reservation->id}}">
+                <form method="POST" class="space-y-6"
+                      action="/doctors/reservation/set/{{$reservation->doctor->id}}/{{$reservation->id}}">
                     @csrf
                     <div class="mb-6">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Jūsų vardas ir pavardė <span class="text-red-500">*</span></label>
-                        <input disabled type="text" id="name" name="name" value="{{$user->name}} {{$user->lastname}}" class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Vardas Pavardenis" required>
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Jūsų
+                            vardas ir pavardė <span class="text-red-500">*</span></label>
+                        <input disabled type="text" id="name" name="name" value="{{$user->name}} {{$user->lastname}}"
+                               class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="Vardas Pavardenis" required>
                     </div>
                     <div class="mb-6">
-                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">El. p. adresas <span class="text-red-500">*</span></label>
-                        <input disabled type="email" id="email" name="email" value="{{$user->email}}" class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required>
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">El.
+                            p. adresas <span class="text-red-500">*</span></label>
+                        <input disabled type="email" id="email" name="email" value="{{$user->email}}"
+                               class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="name@flowbite.com" required>
                     </div>
                     <div class="mb-6">
-                        <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Telefonas <span class="text-red-500">*</span></label>
-                        <input disabled type="text" id="phone" name="phone" value="{{$user->phone}}" class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required>
+                        <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Telefonas
+                            <span class="text-red-500">*</span></label>
+                        <input disabled type="text" id="phone" name="phone" value="{{$user->phone}}"
+                               class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="name@flowbite.com" required>
                     </div>
                     <div class="mb-6">
-                        <label for="service" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Paslaugos <span class="text-red-500">*</span></label>
+                        <label for="service" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Paslaugos
+                            <span class="text-red-500">*</span></label>
                         <select id="form-role" name="service"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             @foreach($reservation->doctor->services as $service)
-                            <option value="{{$service->id}}">{{$service->name}} ({{$service->price}} €)</option>
+                                <option value="{{$service->id}}">{{$service->name}} ({{$service->price}} €)</option>
                             @endforeach
 
                         </select>
                     </div>
                     <div class="mb-6">
-                        <label for="comment" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Komentaras / vizito priežastis:</label>
-                        <textarea id="comment" rows="4" name="comment" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Įveskite tekstą"></textarea>
+                        <label for="comment" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Komentaras
+                            / vizito priežastis:</label>
+                        <textarea id="comment" rows="4" name="comment"
+                                  class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                  placeholder="Įveskite tekstą"></textarea>
                     </div>
-{{--                    <div class="mb-6">--}}
-{{--                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Mob. tel. nr. <span class="text-red-500">*</span></label>--}}
-{{--                        <input type="tel" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required>--}}
-{{--                    </div>--}}
-                    <button type="submit" class="transition text-white border-[#35BCA3] bg-[#35BCA3] border-[2px] hover:bg-white hover:text-[#35BCA3] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Užbaigti registracija</button>
+                    <button type="submit"
+                            class="transition text-white border-[#35BCA3] bg-[#35BCA3] border-[2px] hover:bg-white hover:text-[#35BCA3] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Užbaigti registracija
+                    </button>
                 </form>
             </div>
         </div>

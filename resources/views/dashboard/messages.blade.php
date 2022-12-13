@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css"/>
     <script src="https://kit.fontawesome.com/e5248e6090.js" crossorigin="anonymous"></script>
 
+
     <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -37,50 +38,26 @@
                 </button>
                 <div class="py-6 px-6 lg:px-8">
                     <h3 id="form-label" class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Sukurti naują
-                        vartotoja</h3>
+                        paslaugą</h3>
                     <form method="POST" id="form-user" class="space-y-6" action="#">
                         @csrf
                         <div>
-                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vardas</label>
+                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Pavadinimas</label>
                             <input type="text" name="name" id="form-name"
                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                   placeholder="Vardas" required="">
+                                   placeholder="Pavadinimas" required="">
                         </div>
+
                         <div>
-                            <label for="lastname"
-                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Pavardė</label>
-                            <input type="text" name="lastname" id="form-lastname"
+                            <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Kaina</label>
+                            <input type="number" name="price" id="form-price"
                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                   placeholder="Pavardė" required="">
+                                   placeholder="10" required="">
                         </div>
-                        <div>
-                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Paštas</label>
-                            <input type="email" name="email" id="form-email"
-                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                   placeholder="test@test.com" required="">
-                        </div>
-                        <div>
-                            <label for="role_id"
-                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Role</label>
-                            <select id="form-role" name="role_id"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                @foreach($roles as $role)
-{{--                                    @if($role->name != 'doctor')--}}
-                                        <option value="{{$role->id}}">{{$role->name}}</option>
-{{--                                    @endif--}}
-                                @endforeach
-                            </select>
-                        </div>
-                        <div id="form-password-control">
-                            <label for="password"
-                                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Slaptažodis</label>
-                            <input type="password" name="password" id="form-password"
-                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                   placeholder="********" required="">
-                        </div>
+
                         <button type="submit" id="form-button"
                                 class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Sukurti vartotoja
+                            Sukurti paslaugą
                         </button>
                     </form>
                 </div>
@@ -127,94 +104,89 @@
     </div>
 
     <div id="main" class="w-full overflow-auto bg-gray-100 h-screen p-10">
-        <h1 class="font-bold text-3xl">Vartotojai</h1>
+        <h1 class="font-bold text-3xl">Žinutės</h1>
         <div class="flex mt-3 justify-between">
             <div class="flex w-1/3">
                   <span
                       class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-                    @
+                    Pavadinimas
                   </span>
                 <input type="text" id="myInput" onkeyup="myFunction()"
                        class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                       placeholder="jonas@gmail.com">
+                       placeholder="Šeimos gydytojai">
             </div>
             <button data-type="new"
                     class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     type="button" data-modal-toggle="authentication-modal">
-                Sukurti naują vartotoją
+                Sukurti naują paslaugą
             </button>
         </div>
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table id="myTable" class="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-4">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                    <th scope="col" class="px-6 py-3">
-                        ID
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Vardas
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Paštas
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Identifikacija
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        <span class="sr-only">Redaguoti</span>
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        <span class="sr-only">Naikinti</span>
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($users as $user)
-                    <tr class="border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700">
-                        <th scope="row"
-                            class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">{{$user->id}}</th>
-                        <td id="name-{{$user->id}}" class="px-6 py-4">
-                            {{$user->name}} {{$user->lastname}}
-                        </td>
-                        <td id="email-{{$user->id}}" class="px-6 py-4">
-                            {{$user->email}}
-                        </td>
-                        <td id="role-{{$user->id}}" class="px-6 py-4">
-                            {{$user->role->name}}
-                        </td>
-                        <td class="px-6 py-4">
-                            <a type="button" data-type="edit" data-modal-toggle="authentication-modal" href="#"
-                               data-id="{{$user->id}}"
-                               class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Redaguoti</a>
-                        </td>
-                        <td class="px-6 py-4 text-right">
-                            <a href="#" data-type="delete" type="button" data-modal-toggle="popup-modal"
-                               data-id="{{$user->id}}"
-                               class="font-medium text-red-500 dark:text-red-500 hover:underline">Naikinti</a>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </div>
+
+
+        <div class="bg-white p-5 mt-5 rounded-lg" id="accordion-flush" data-accordion="collapse"
+             data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+             data-inactive-classes="text-gray-500 dark:text-gray-400">
+
+            @foreach($messages as $message)
+                <h2 id="accordion-flush-heading-{{$message->id}}">
+                    <button type="button"
+                            class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400"
+                            data-accordion-target="#accordion-flush-body-{{$message->id}}" aria-expanded="false"
+                            aria-controls="accordion-flush-body-{{$message->id}}" data-type="open-message" data-id="{{$message->id}}" >
+                        <div class="flex w-full justify-between pr-5">
+                            <span>{!! !$message->read ? '<span id="new-'. $message->id . '" class="bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">Naujas</span>' : "" !!} <span id="name-{{$message->id}}">{{$message->subject}} [{{$message->name}} {{$message->lastname}}]</span></span>
+                            <span>{{$message->created_at}}</span>
+                        </div>
+                        <svg data-accordion-icon="" class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                  clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </h2>
+                <div id="accordion-flush-body-{{$message->id}}" class="hidden" aria-labelledby="accordion-flush-heading-{{$message->id}}">
+                    <div class="py-5 font-light border-b border-gray-200 dark:border-gray-700">
+                        <ul class="pl-5 text-gray-500 list-disc dark:text-gray-400 mb-5">
+                            <li><p class="font-semibold">Siuntejas: {{$message->name}} {{$message->lastname}}</p></li>
+                            <li><p class="font-semibold">Paštas: {{$message->email}}</p></li>
+                            <li><p class="font-semibold">Telefonas: {{$message->phone}}</p></li>
+                        </ul>
+
+                        <p class="mb-2 text-gray-500 dark:text-gray-400 font-semibold">{{$message->comment}}</p>
+
+                        <div class="w-full flex justify-end">
+                            <a href="#" data-type="delete" type="button" data-modal-toggle="popup-modal" data-id="{{$message->id}}"
+                               class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-red-700  transition rounded-lg bg-red-600 hover:bg-white border-[1px] border-red-600 hover:text-red-600 text-white dark:focus:ring-blue-800">
+                                Naikinti žinute
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+
+
+
     </div>
+</div>
 </div>
 </body>
 <script>
+    const messages = document.getElementById("accordion-flush");
+    console.log(messages);
+
+
+
+
     const container = document.querySelector("body");
     const main = document.getElementById('main');
     const formName = document.getElementById('form-name');
-    const formLastname = document.getElementById('form-lastname');
-    const formEmail = document.getElementById('form-email');
+    const formPrice = document.getElementById('form-price');
     const formButton = document.getElementById('form-button');
     const formLabel = document.getElementById('form-label');
-    const formRole = document.getElementById('form-role');
     const form = document.getElementById('form-user');
     const deleteLabel = document.getElementById('delete-label');
     const deleteForm = document.getElementById('delete-form');
-    const passwordControl = document.getElementById('form-password-control');
-    const passwordMarkup = '<label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Slaptažodis</label>' +
-        '<input type="password" name="password" id="form-password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="********" required="">'
 
 
     // Listen For Clicks Within Container
@@ -223,54 +195,63 @@
 
         // Store Target Element In Variable
         const element = event.target;
+        console.log(element)
+        const elem_but = element.closest("BUTTON");
 
         // If Target Element Is a Button
-        if (element.nodeName === 'BUTTON') {
-            if (element.dataset.type === 'new') {
-                form.action = '/dashboard/users/new';
-                formName.value = '';
-                formLastname.value = '';
-                formEmail.value = '';
-                formRole.value = '1';
-                formLabel.innerHTML = `Sukurti naują vartotoją`;
-                formButton.innerHTML = 'Sukurti naują vartotoją'
-                passwordControl.innerHTML = passwordMarkup;
-            }
-        }
         if (element.nodeName === 'A') {
+
             if (element.dataset.type === 'edit') {
                 let id = element.dataset.id;
                 let stringName = document.getElementById(`name-${id}`).innerHTML.trim()
-                let nameArray = stringName.split(' ');
-                let email = document.getElementById(`email-${id}`).innerHTML.trim()
-                let role = document.getElementById(`role-${id}`).innerHTML.trim()
-                form.action = `/dashboard/users/edit/${id}`
-                formName.value = nameArray[0];
-                formLastname.value = nameArray[1];
-                formEmail.value = email;
-                formRole.value = role;
+                let stringPrice = document.getElementById(`price-${id}`).innerHTML.trim()
+                form.action = `/dashboard/services/edit/${id}`
+                formName.value = stringName;
+                formPrice.value = stringPrice;
                 formLabel.innerHTML = `Redaguoti ${stringName}`;
-                formButton.innerHTML = 'Redaguoti vartotoją'
-                passwordControl.innerHTML = '';
-                switch (role) {
-                    case 'user':
-                        formRole.value = '1';
-                        break;
-                    case 'doctor':
-                        formRole.value = '2';
-                        break;
-                    case 'admin':
-                        formRole.value = '3';
-                        break;
-                }
+                formButton.innerHTML = 'Redaguoti paslaugą'
             }
             if (element.dataset.type === 'delete') {
+                console.log("NAIKINTI");
+
                 let id = element.dataset.id;
                 let name = document.getElementById(`name-${id}`).innerHTML.trim()
-                deleteForm.action = `/dashboard/users/delete/${id}`;
-                deleteLabel.innerHTML = `Ar tikrai norite trinti ${name} [ID: ${id}]`;
+                deleteForm.action = `/dashboard/messages/delete/${id}`;
+                deleteLabel.innerHTML = `Ar tikrai norite trinti "${name}" [ID: ${id}]`;
             }
 
+        }
+
+        if (elem_but.nodeName === 'BUTTON') {
+            if (elem_but.dataset.type === 'open-message') {
+
+                let newButton = document.getElementById(`new-${elem_but.dataset.id}`);
+                console.log(newButton);
+                if(newButton){
+                    newButton.remove();
+                    test(elem_but.dataset.id);
+                }
+
+            }
+            if (element.dataset.type === 'new') {
+                form.action = '/dashboard/services/new';
+                formName.value = '';
+                formLabel.innerHTML = `Sukurti naują paslaugą`;
+                formButton.innerHTML = 'Sukurti naują paslaugą'
+            }
+        }
+
+    }
+
+    const test = async function (id) {
+        try {
+        console.log("siunciu api");
+        const url=`/messages/render/read/${id}`;
+        const res = await fetch(`/messages/render/read/${id}`);
+        const data = await res.json()
+        console.log(data);
+        } catch (err) {
+            throw err;
         }
     }
 
@@ -281,7 +262,7 @@
         table = document.getElementById("myTable");
         tr = table.getElementsByTagName("tr");
         for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[1];
+            td = tr[i].getElementsByTagName("td")[0];
             if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {

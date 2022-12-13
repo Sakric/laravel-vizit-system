@@ -74,7 +74,6 @@ const  renderCalendar = () => {
     date.setDate(1);
 
     const monthDays = document.querySelector(".days");
-
     const lastDay = new Date(
         date.getFullYear(),
         date.getMonth() + 1,
@@ -89,12 +88,13 @@ const  renderCalendar = () => {
 
     const firstDayIndex = date.getDay();
 
+
+
     const lastDayIndex = new Date(
         date.getFullYear(),
         date.getMonth() + 1,
         0
     ).getDay();
-
     const nextDays = 7 - lastDayIndex - 1;
 
     const custom_days = ['', 'Pirmadienis', 'Antradienis', 'Trečiadienis', 'Ketvirtadienis', 'Penktadienis', 'Šesštadienis', 'Sekmadienis'];
@@ -106,7 +106,9 @@ const  renderCalendar = () => {
     let days = "";
 
     for (let x = firstDayIndex; x > 0; x--) {
+
         days += `<div class="text-[1.4rem] m-[0.3rem] w-[calc(40.2rem_/_7)] h-[5rem] flex justify-center items-center shadow-md transition hover:bg-[#3BB1B8] cursor-pointer bg-[#40AACA] rounded-lg opacity-60" id="${date.getFullYear()}-${(date.getMonth()).toString().padStart(2, '0')}-${(prevLastDay - x + 1).toString().padStart(2, '0')}">${prevLastDay - x + 1}</div>`;
+
     }
 
     for (let i = 1; i <= lastDay; i++) {
@@ -122,52 +124,24 @@ const  renderCalendar = () => {
 
     for (let j = 1; j <= nextDays; j++) {
         days += `<div class="text-[1.4rem] m-[0.3rem] w-[calc(40.2rem_/_7)] h-[5rem] flex justify-center items-center shadow-md transition hover:bg-[#3BB1B8] cursor-pointer opacity-60 bg-[#40AACA] rounded-lg" id="${date.getFullYear()}-${(date.getMonth() + 2).toString().padStart(2, '0')}-${(j).toString().padStart(2, '0')}">${j}</div>`;
-        monthDays.innerHTML = days;
     }
+    monthDays.innerHTML = days;
+
     test(monthDays);
 
-    // Array.from(monthDays.children).forEach(function (element) {
-    //     element.addEventListener('click', function (e) {
-    //         let markup = '';
-    //         draw.classList.toggle('-translate-x-[380px]')
-    //         backdrop.classList.toggle('hidden');
-    //         vis_data.forEach((data) => {
-    //             if (data.date.slice(0, 10) === e.target.id) {
-    //                 let user = await callAPIgetUser(data.user_id);
-    //                 markup += `
-    //         <li>
-    //             <a href="#" class="block items-center p-3 sm:flex hover:bg-gray-100 dark:hover:bg-gray-700">
-    //                 <div class="text-gray-600 dark:text-gray-400">
-    //                     <div class="text-base font-medium text-gray-900">Susitikimas su ${user.name} ${user.lastname}</div>
-    //                     <div class="text-base font-medium text-gray-900">Laikas: 10:20</div>
-    //                     <div class="text-sm font-normal">"${data.comment ? data.comment : 'Nėra komentaro.'}"</div>
-    //                 </div>
-    //             </a>
-    //         </li>
-    //                 `
-    //             }
-    //         })
-    //         draw_visits.innerHTML = '';
-    //         if (markup.length > 0) {
-    //             draw_visits.insertAdjacentHTML('afterbegin', markup)
-    //
-    //         } else {
-    //             draw_visits.insertAdjacentHTML('afterbegin', none_markup)
-    //         }
-    //     })
-    // });
+
 };
 
 document.querySelector(".prev").addEventListener("click", () => {
     date.setMonth(date.getMonth() - 1);
     renderCalendar();
-    callAPI(1);
+    callAPI(doctor_id);
 });
 
 document.querySelector(".next").addEventListener("click", () => {
     date.setMonth(date.getMonth() + 1);
     renderCalendar();
-    callAPI(1);
+    callAPI(doctor_id);
 });
 
 renderCalendar();
@@ -204,6 +178,6 @@ const callAPIgetUser = async function (value) {
         throw err;
     }
 }
-callAPI(1);
+callAPI(doctor_id);
 // callAPIgetUser(1);
 

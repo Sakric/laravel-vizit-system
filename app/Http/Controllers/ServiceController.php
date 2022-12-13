@@ -65,7 +65,7 @@ class ServiceController extends Controller
         }
 
 
-        return redirect('/dashboard/doctors/services/' . $doctor->id);
+        return redirect('/dashboard/doctors');
 
     }
 

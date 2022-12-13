@@ -21,40 +21,33 @@
     <x-navbar/>
 
     <div class="w-full h-52 bg-gradient-to-r from-[#40AACA] to-[#35BCA3] flex items-center justify-center">
-        <h1 class="text-5xl text-white font-bold">Gydytojai</h1>
+        <h1 class="text-5xl text-white font-bold">Naujienos</h1>
     </div>
 
 
     <div class="container mx-auto p-5">
 
-        <h1 class="text-3xl mt-4 text-[#35BCA3] font-semibold">Mūsų specialistai</h1>
+        <h1 class="text-3xl mt-4 text-[#35BCA3] font-semibold">Naujausios naujienos</h1>
 
-        <div class="flex justify-center w-full mt-10">
-            <ul id="filter" class="flex items-center flex-wrap justify-center gap-3">
-                <li class="px-4 py-3 bg-gray-200 rounded-full text-xl cursor-pointer" data-filter="all">Visi specialistai</li>
-            @foreach($categories as $category)
-                    <li class="px-4 py-3 bg-gray-200 rounded-full text-xl cursor-pointer hover:bg-[#35BCA3] hover:text-white" data-filter="{{$category->name}}">{{$category->name}}</li>
-                @endforeach
-            </ul>
-        </div>
+        <div id="news" class="w-full flex flex-wrap mt-10 min-h-fit gap-8">
+            @foreach($pages as $page)
 
-        <div id="doctors" class="w-full flex flex-wrap mt-10 min-h-fit gap-8">
-            @foreach($doctors as $doctor)
-            <div class="w-80 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700" data-category="{{$doctor->category->name}}">
-                <a href="/doctors/{{$doctor->id}}">
-                    <img class="rounded-t-lg" src="/storage/{{$doctor->thumbnail}}" alt="{{$doctor->name}}" />
-                </a>
-                <div class="p-5">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{$doctor->user->name}} {{$doctor->user->lastname}}</h5>
+                <div class="max-w-[20rem] bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700" bis_skin_checked="1">
+                    <a href="/post/{{$page->id}}">
+                        <img class="rounded-t-lg" src="/storage/{{$page->thumbnail }}" alt="{{$page->name}}">
                     </a>
-                    <p class="mb-3 font-normal text-gray-700 text-xl">{{$doctor->category->name}}</p>
-                    <a href="/doctors/{{$doctor->id}}" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white text-white border-[#35BCA3] bg-[#35BCA3] border-[2px] hover:bg-white hover:text-[#35BCA3] rounded-lg focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Peržiurėti
-                        <svg class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    </a>
+                    <div class="p-5" bis_skin_checked="1">
+                        <a href="/post/{{$page->id}}">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{$page->name}}</h5>
+                        </a>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 new-body">{!! substr(strip_tags($page->body), 0, 120) !!}{{strlen(strip_tags($page->body)) > 120 ? "..." : "" }}</p>
+                        <a href="/post/{{$page->id}}" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-[#35BCA3] transition rounded-lg bg-[#35BCA3] hover:bg-white border-[1px] border-[#35BCA3] hover:text-[#35BCA3] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Skaityti daugiau
+                            <svg aria-hidden="true" class="ml-2 -mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                        </a>
+                    </div>
                 </div>
-            </div>
+
             @endforeach
 
 
@@ -137,55 +130,4 @@
 
     </body>
 
-<script>
-    const container = document.querySelector("body");
-    const filter = document.getElementById('filter').children;
-    const doctors = document.getElementById('doctors').children;
-    const notFound = document.getElementById('none');
-    container.onclick = function (event) {
-        // Prevent default behavior of button
-
-        // Store Target Element In Variable
-        const element = event.target;
-
-
-        // If Target Element Is a Button
-        if (element.nodeName === 'LI') {
-
-            const category = element.dataset.filter;
-            Array.from(filter).forEach(e => {
-                e.classList.remove('bg-[#35BCA2]')
-                e.classList.remove('text-white')
-            });
-            element.classList.add('bg-[#35BCA2]')
-            element.classList.add('text-white')
-
-            if(!notFound.classList.contains('hidden')) {
-                notFound.classList.add('hidden');
-            }
-            let test = 0;
-            Array.from(doctors).forEach(d =>{
-                if(category === 'all'){
-                    test++;
-                    if(d.classList.contains('hidden')){
-                        d.classList.remove('hidden')
-                    }
-                } else {
-                    if (d.dataset.category === category) {
-                        test++;
-                        if (d.classList.contains('hidden')) {
-                            d.classList.remove('hidden')
-                        }
-                    } else {
-                        if (!d.classList.contains('hidden')) {
-                            d.classList.add('hidden')
-                        }
-                    }
-                }
-            });
-            console.log(test);
-            if(test === 0) notFound.classList.remove('hidden');
-        }
-    }
-</script>
 </html>

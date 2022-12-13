@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reservation;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -65,6 +67,28 @@ class UserController extends Controller
         $filterResult = User::query()
             ->where('id', "{$query}")->get();
         return response()->json($filterResult);
+    }
+
+    public function getAll()
+    {
+        return view('dashboard.users', [
+            'users' => User::all(),
+            'roles' => Role::all()
+        ]);
+    }
+
+    public function openProfile()
+    {
+        return view('user-profile', [
+            'user' => Auth::user(),
+            'reservations' => Reservation::where('user_id', '=', Auth::user()->id)->latest()->get()
+        ]);
+    }
+    public function openProfileReservation(Reservation $reservation)
+    {
+        return view('user-reservation', [
+            'reservation' => $reservation
+        ]);
     }
 }
 

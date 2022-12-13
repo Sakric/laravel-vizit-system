@@ -27,6 +27,82 @@
 <body>
 <x-navbar/>
 
+<div id="authentication-modal" tabindex="-1" aria-hidden="true"
+     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center">
+    <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <button type="button"
+                    class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                    data-modal-toggle="authentication-modal">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                          clip-rule="evenodd"></path>
+                </svg>
+            </button>
+            <div class="py-6 px-6 lg:px-8">
+                <h3 id="form-label" class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Išrašyti pacientui vaistus [{{$reservation->user->name}} {{$reservation->user->lastname}}]</h3>
+                <form method="POST" id="form-user" class="space-y-6" action="/doctor/medicine/prescribe/{{$reservation->id}}/{{$reservation->user->id}}">
+                    @csrf
+                    <div>
+                        <label for="medicine_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Vaistas</label>
+                        <select id="form-role" name="medicine_id"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            @foreach($medicines as $medicine)
+                                <option value="{{$medicine->id}}">{{$medicine->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <button type="submit" id="form-button"
+                            class="transition text-white border-[#35BCA3] bg-[#35BCA3] border-[2px] hover:bg-white hover:text-[#35BCA3] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Išrašyti vaistą
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="popup-modal" tabindex="-1"
+     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full">
+    <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <button type="button"
+                    class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                    data-modal-toggle="popup-modal">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                          clip-rule="evenodd"></path>
+                </svg>
+            </button>
+            <div class="p-6 text-center">
+                <svg class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none"
+                     stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <h3 id="delete-label" class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Ar tikrai
+                    norite trinti Lukas Martinkus [ID: 1]</h3>
+                <form method="POST" id="delete-form" action="#">
+                    @csrf
+                    @method('DELETE')
+                    <button data-modal-toggle="popup-modal" type="submit"
+                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                        Naikinti
+                    </button>
+                    <button data-modal-toggle="popup-modal" type="button"
+                            class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                        Atšaukti
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <div class="w-full h-72 bg-gradient-to-r from-[#40AACA] to-[#35BCA3] flex items-center justify-center">
     <h1 class="text-white text-5xl -mt-28">{{$reservation->user->name}} {{$reservation->user->lastname}} {{$reservation->date}}</h1>
@@ -45,6 +121,7 @@
                 <p class="text-1xl text-white font-semibold">Pavardė: {{$reservation->user->lastname}}</p>
                 <p class="text-1xl text-white font-semibold">Paštas: {{$reservation->user->email}}</p>
                 <p class="text-1xl text-white font-semibold">Telefonas: {{$reservation->user->phone}}</p>
+
             </div>
         </div>
     </div>
@@ -55,18 +132,21 @@
                 <p class="text-3xl mb-1 text-white font-semibold">Vizito informacija</p>
                 <p class="text-1xl text-white font-semibold">Daktaras: {{$reservation->doctor->user->name}} {{$reservation->doctor->user->lastname}}</p>
                 <p class="text-1xl text-white font-semibold">Data: {{$reservation->date}}</p>
-                <p class="text-1xl text-white font-semibold">Paslauga: {{$reservation->service->name}}</p>
+                <p class="text-1xl text-white font-semibold">Paslauga: {{$reservation->service->name}} ({{$reservation->service->price}} €)</p>
                 <p class="text-1xl text-white font-semibold">Vizitas sukurtas: {{$reservation->created_at}}</p>
             </div>
         </div>
     </div>
 
     <div class="mt-5">
-    <a type="button" href="/profile"
+    <a type="button" href="#" data-modal-toggle="authentication-modal"
        class="transition text-white border-[#35BCA3] bg-[#35BCA3] border-[2px] hover:bg-white hover:text-[#35BCA3] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
         Išrašyti naujus vaistus
     </a>
 </div>
+    <div class="w-full flex items-center justify-center mt-3">
+        <h1 class="mt-1 mb-5 text-3xl font-semibold text-[#35BCA3]">Išrašyti rekomendaciniai nereceptiniai vaistai</h1>
+    </div>
 
     <div class="overflow-x-auto relative shadow-md sm:rounded-lg mt-5">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -81,25 +161,41 @@
                 <th scope="col" class="py-3 px-6">
                     Išrašymo data
                 </th>
+                <th scope="col" class="py-3 px-6">
+                </th>
             </tr>
             </thead>
-            <tbody>
 
-                <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+            <tbody>
+                @foreach($reservation->user->medicines as $medicine)
+                    <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                     <th scope="row"
                         class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        1
+                        {{$medicine->pivot->id}}
                     </th>
-
-                    <td class="py-4 px-6">
-                        Telominas
+                    <td class="py-4 px-6" id="name-{{$medicine->pivot->id}}">
+                        {{$medicine->name}}
                     </td>
                     <td class="py-4 px-6">
-                        2022-01-1
+                        {{$medicine->pivot->created_at}}
                     </td>
+                    <td class="py-4 px-6">
+                        <a href="#" data-type="delete" type="button" data-modal-toggle="popup-modal"
+                           data-id="{{$medicine->pivot->id}}"
+                           class="mt-2 inline-flex items-center py-1.5 px-3 text-sm font-medium text-center text-white bg-red-600  transition rounded-lg bg-red-600 hover:bg-white border-[1px] border-red-600 hover:text-red-600 text-white dark:bg-red-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Naikinti
+                        </a>
+                    </td>
+                </tr>
+                @endforeach
 
             </tbody>
         </table>
+        @if(count($reservation->user->medicines) <= 0)
+            <div class="w-full flex items-center justify-center mt-3">
+                <h1 class="mt-1 mb-5 text-3xl font-semibold text-[#35BCA3]">Pacientas neturi išrašytų vaistų</h1>
+            </div>
+        @endif
     </div>
 </div>
 
@@ -194,7 +290,51 @@
 </footer>
 
 
+@if(session()->has('message'))
+    <div id="message" class="shadow-xl transition ease-in-out delay-300 fixed bg-gradient-to-r from-[#40AACA] to-[#35BCA3] text-white py-2 px-4 rounded-xl bottom-3 right-3 text-lg">
+        <p>{{session('message')}}</p>
+    </div>
+@endif
+<script>
+
+    function hideLogin() {
+        document.getElementById("message").classList.add("opacity-0");
+        setTimeout(function (){
+            document.getElementById("message").classList.add("hidden")
+        }, 1000);
+    }
+    if(document.getElementById("message")){
+        setTimeout(hideLogin, 5000);
+    }
+</script>
+
+
 </body>
-<script src="{{ asset('js/userProfile.js')}}"></script>
+
+<script>
+    const containerForm = document.querySelector("body");
+    const main = document.getElementById('main');
+    const deleteLabel = document.getElementById('delete-label');
+    const deleteForm = document.getElementById('delete-form');
+
+
+    // Listen For Clicks Within Container
+    containerForm.onclick = function (event) {
+        // Prevent default behavior of button
+
+        // Store Target Element In Variable
+        const element = event.target;
+
+        // If Target Element Is a Button
+        if (element.dataset.type === 'delete') {
+            let id = element.dataset.id;
+            console.log(id);
+
+            let name = document.getElementById(`name-${id}`).innerHTML.trim()
+            deleteForm.action = `/doctor/delete/prescription/${id}`;
+            deleteLabel.innerHTML = `Ar tikrai norite trinti ${name} [ID: ${id}]`;
+        }
+    }
+</script>
 
 </html>

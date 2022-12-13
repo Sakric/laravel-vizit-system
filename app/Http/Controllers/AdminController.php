@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Storage;
 
 class AdminController extends Controller
 {
@@ -63,9 +64,11 @@ class AdminController extends Controller
             'thumbnail' => 'required|image',
             'category_id' => 'required',
             'body' => 'required',
+            'work_time' => 'required',
         ]);
 
-        $attributes['thumbnail'] = request()->file('thumbnails')->store('doctors');
+
+        $attributes['thumbnail'] = request()->file('thumbnail')->store('doctors');
 
         $user = User::where('id', $attributes['user_id'])->first();
 
@@ -85,6 +88,7 @@ class AdminController extends Controller
             'thumbnail' => 'image',
             'category_id' => 'required',
             'body' => 'required',
+            'work_time' => 'required',
         ]);
         if (isset($attributes['thumbnail'])) {
             $attributes['thumbnail'] = request()->file('thumbnail')->store('doctors');
@@ -99,6 +103,7 @@ class AdminController extends Controller
     public function deleteDoctor(Doctors $doctor)
     {
         User::where('id', $doctor->user->id)->update(['role_id' => 1]);
+        Storage::delete($doctor->thumbnail);
         $doctor->delete();
         return redirect('/dashboard/doctors');
     }

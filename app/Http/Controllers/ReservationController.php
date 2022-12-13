@@ -20,6 +20,28 @@ class ReservationController extends Controller
         return response()->json($filterResult);
 
     }
+    public function openDoctorReservations(Doctors $doctor)
+    {
+        return view('dashboard.doctor-reservations',[
+            'reservations' => Reservation::query()->where('doctor_id', $doctor->id)->get(),
+            'doctor' => $doctor
+        ]);
+    }
+    public function resetReservation(Reservation $reservation)
+    {
+        $reservation->update([
+            'user_id' => null,
+            'service_id' => null,
+            'comment' => null
+        ]);
+        return back();
+    }
+
+    public function deleteReservation(Reservation $reservation)
+    {
+        $reservation->delete();
+        return back();
+    }
 
     public function createVizit(Request $request)
     {
@@ -44,7 +66,15 @@ class ReservationController extends Controller
             'comment' => request()->comment,
             'user_id' => Auth::user()->id,
         ]);
-        return 'done';
+
+        session()->flash('success', 'Sėkmingai rezervavotes vizitą pas gydytoją');
+
+        return view('user-reservation', [
+            'reservation' => $reservation
+        ]);
+
+
+
 
 //        return view('doctor-reservation',[
 //            'reservation' =>  Reservation::where('id', $attributes['rez'])->first(),

@@ -40,7 +40,7 @@
         <div class="mt-5">
         <a type="button" href="/profile"
            class="transition text-white border-[#35BCA3] bg-[#35BCA3] border-[2px] hover:bg-white hover:text-[#35BCA3] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Grįžti atgal
+            Grįžti atgal į profilį
         </a>
         </div>
         <div class="flex mx-auto mt-10 w-full flex justify-between flex-wrap gap-10">
@@ -49,30 +49,30 @@
             <div class="p-6 flex flex-col items-center gap-2 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 min-w-[300px]">
                 <iframe src="/img/svg/doctor.svg" width="100px" height="100px"></iframe>
                 <h5 class="mx-auto mb-2 text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">Daktaras</h5>
-                <h5 class="mx-auto mb-2 text-2xl font-semibold tracking-tight text-[#35BCA3] text-gray-900 dark:text-white">{{$reservation->doctor->user->name}} {{$reservation->doctor->user->lastname}}</h5>
+                <h5 class="mx-auto mb-2 text-xl font-semibold tracking-tight text-[#35BCA3] text-gray-900 dark:text-white">{{$reservation->doctor->user->name}} {{$reservation->doctor->user->lastname}}</h5>
             </div>
 
             <div class="p-6 flex flex-col items-center gap-2 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 min-w-[300px]">
                 <iframe src="/img/svg/calendar.svg" width="100px" height="100px"></iframe>
                 <h5 class="mx-auto mb-2 text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">Data ir laikas</h5>
-                <h5 class="mx-auto mb-2 text-2xl font-semibold tracking-tight text-[#35BCA3] text-gray-900 dark:text-white"> {{substr($reservation->date, 0,11)}} {{substr($reservation->date, 11,-3)}} </h5>
+                <h5 class="mx-auto mb-2 text-xl font-semibold tracking-tight text-[#35BCA3] text-gray-900 dark:text-white"> {{substr($reservation->date, 0,11)}} {{substr($reservation->date, 11,-3)}} </h5>
             </div>
 
             <div class="p-6 flex flex-col items-center gap-2 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 min-w-[300px]">
                 <iframe src="/img/svg/user.svg" width="100px" height="100px"></iframe>
                 <h5 class="mx-auto mb-2 text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">Užrasytas pacientas</h5>
-                <h5 class="mx-auto mb-2 text-2xl font-semibold tracking-tight text-[#35BCA3] text-gray-900 dark:text-white">{{$reservation->user->name}} {{$reservation->user->lastname}}</h5>
+                <h5 class="mx-auto mb-2 text-xl font-semibold tracking-tight text-[#35BCA3] text-gray-900 dark:text-white">{{$reservation->user->name}} {{$reservation->user->lastname}}</h5>
             </div>
 
             <div class="p-6 flex flex-col items-center gap-2 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 min-w-[300px]">
                 <iframe src="/img/svg/service.svg" width="100px" height="100px"></iframe>
                 <h5 class="mx-auto mb-2 text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">Paslauga</h5>
-                <h5 class="mx-auto mb-2 text-2xl font-semibold tracking-tight text-[#35BCA3] text-gray-900 dark:text-white">{{$reservation->service->name}}</h5>
+                <h5 class="mx-auto mb-2 text-xl font-semibold tracking-tight text-[#35BCA3] text-gray-900 dark:text-white">{{$reservation->service->name}} ({{$reservation->service->price}} €)</h5>
             </div>
 
             <div class="p-6 flex flex-col gap-2 w-full bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 min-w-[300px]">
                 <h5 class="mb-2 text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">Komentaras</h5>
-                <h5 class="mb-2 text-2xl font-semibold tracking-tight text-[#35BCA3] text-gray-900 dark:text-white">{{$reservation->comment}}</h5>
+                <h5 class="mb-2 text-xl font-semibold tracking-tight text-[#35BCA3] text-gray-900 dark:text-white">{{$reservation->comment}}</h5>
             </div>
 
 
@@ -186,7 +186,23 @@
     </div>
 </footer>
 
+@if(session()->has('success'))
+    <div id="popup-success" class="shadow-xl transition ease-in-out delay-300 fixed bg-gradient-to-r from-[#40AACA] to-[#35BCA3] text-white py-2 px-4 rounded-xl bottom-3 right-3 text-lg">
+        <p>{{session('success')}}</p>
+    </div>
+@endif
+<script>
 
+    function hideLogin() {
+        document.getElementById("popup-success").classList.add("opacity-0");
+        setTimeout(function (){
+            document.getElementById("popup-success").classList.add("hidden")
+        }, 1000);
+    }
+    if(document.getElementById("popup-success")){
+        setTimeout(hideLogin, 5000);
+    }
+</script>
 </body>
 
 <script>

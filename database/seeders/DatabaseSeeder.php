@@ -35,6 +35,30 @@ class DatabaseSeeder extends Seeder
             'name' => 'LOR'
         ]);
         Category::factory()->create([
+            'name' => 'Akušeriai'
+        ]);
+        Category::factory()->create([
+            'name' => 'Kardiologai'
+        ]);
+        Category::factory()->create([
+            'name' => 'Kineziterapeutai'
+        ]);
+        Category::factory()->create([
+            'name' => 'Reabilitologai'
+        ]);
+        Category::factory()->create([
+            'name' => 'Urologai'
+        ]);
+        Category::factory()->create([
+            'name' => 'Psichiatrai'
+        ]);
+        Category::factory()->create([
+            'name' => 'Slaugytojai'
+        ]);
+        Category::factory()->create([
+            'name' => 'Odontologai'
+        ]);
+        Category::factory()->create([
             'name' => 'Chirurgai'
         ]);
          User::factory()->create([
@@ -80,7 +104,11 @@ class DatabaseSeeder extends Seeder
 <p>2015 m. projektas VP2-1.3-ŪM-02-K-02-100 Vakarų Lietuvos gamtinių i&scaron;teklių panaudojimas kosmetikos ir sveikatinimo produktų gamybai ir paslaugų teikimui;</p>
 <p>2012 m. biomedicininis tyrimas &bdquo;Psichoemocinis stresas ir nuovargis jūrininko darbe ir jų mažinimo galimybės&ldquo;- tyrėja;</p>
 <p>Gydytoja yra Lietuvos Medikų Sąjūdžio narė.</p>',
-            'thumbnail' => 'doctors/4hSUlcdOzwJww6l1OzclDLo0IwRu4eLiZih7drwJ.jpg'
+            'thumbnail' => 'doctors/4hSUlcdOzwJww6l1OzclDLo0IwRu4eLiZih7drwJ.jpg',
+            'work_time' => '<p>Neporinėmis mėn. diemonis:</p>
+                    <p>I-V 15:00 val. - 18:00 val.</p>
+                    <p>Porinėmis mėn. diemonis:</p>
+                    <p>I-V 8:00 val. - 11:00 val.</p>'
 
         ]);
 
