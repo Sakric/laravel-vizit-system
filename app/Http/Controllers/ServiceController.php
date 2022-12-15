@@ -43,10 +43,6 @@ class ServiceController extends Controller
     }
     public function updateDoctor(Doctors $doctor)
     {
-//        dd($doctor->id);
-//        dd(\request()->except('_token'));
-
-//        dd(\DB::table('service_doctor')->where('doctor_id', '=', $doctor->id)->get());
         $values = array();
         foreach(\request()->except('_token') as $value){
             $values[] = $value;
@@ -63,10 +59,8 @@ class ServiceController extends Controller
                 \DB::table('service_doctor')->where('id', '=', $value->id)->delete();
             }
         }
-
-
+        session()->flash('success_login', 'Sėkmingai pakeistos gydytojo paslaugos');
         return redirect('/dashboard/doctors');
-
     }
 
 

@@ -60,6 +60,12 @@
                                    placeholder="test@test.com" required="">
                         </div>
                         <div>
+                            <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Telefonas</label>
+                            <input type="text" name="phone" id="form-phone"
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                   placeholder="+370 ..." required="">
+                        </div>
+                        <div>
                             <label for="role_id"
                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Role</label>
                             <select id="form-role" name="role_id"
@@ -158,6 +164,9 @@
                         Paštas
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        Telefonas
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         Identifikacija
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -178,6 +187,9 @@
                         </td>
                         <td id="email-{{$user->id}}" class="px-6 py-4">
                             {{$user->email}}
+                        </td>
+                        <td id="phone-{{$user->id}}" class="px-6 py-4">
+                            {{$user->phone}}
                         </td>
                         <td id="role-{{$user->id}}" class="px-6 py-4">
                             {{$user->role->name}}
@@ -206,6 +218,7 @@
     const formName = document.getElementById('form-name');
     const formLastname = document.getElementById('form-lastname');
     const formEmail = document.getElementById('form-email');
+    const formPhone = document.getElementById('form-phone');
     const formButton = document.getElementById('form-button');
     const formLabel = document.getElementById('form-label');
     const formRole = document.getElementById('form-role');
@@ -244,11 +257,13 @@
                 let nameArray = stringName.split(' ');
                 let email = document.getElementById(`email-${id}`).innerHTML.trim()
                 let role = document.getElementById(`role-${id}`).innerHTML.trim()
+                let phone = document.getElementById(`phone-${id}`).innerHTML.trim()
                 form.action = `/dashboard/users/edit/${id}`
                 formName.value = nameArray[0];
                 formLastname.value = nameArray[1];
                 formEmail.value = email;
                 formRole.value = role;
+                formPhone.value = phone;
                 formLabel.innerHTML = `Redaguoti ${stringName}`;
                 formButton.innerHTML = 'Redaguoti vartotoją'
                 passwordControl.innerHTML = '';

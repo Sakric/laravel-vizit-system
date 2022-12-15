@@ -36,13 +36,13 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/dashboard/pages', [PageController::class, 'open']);
+Route::get('/dashboard/pages', [PageController::class, 'open'])->middleware(['admin']);
 Route::get('/news', [PageController::class, 'openNews']);
-Route::get('/dashboard/pages/new', [PageController::class, 'openCreate']);
-Route::post('/dashboard/pages/create', [PageController::class, 'createPage']);
-Route::post('/dashboard/pages/update/{page}', [PageController::class, 'updatePage']);
-Route::delete('/dashboard/pages/delete/{page}', [PageController::class, 'deletePage']);
-Route::get('/dashboard/post/edit/{page}', [PageController::class, 'editPage']);
+Route::get('/dashboard/pages/new', [PageController::class, 'openCreate'])->middleware(['admin']);
+Route::post('/dashboard/pages/create', [PageController::class, 'createPage'])->middleware(['admin']);
+Route::post('/dashboard/pages/update/{page}', [PageController::class, 'updatePage'])->middleware(['admin']);
+Route::delete('/dashboard/pages/delete/{page}', [PageController::class, 'deletePage'])->middleware(['admin']);
+Route::get('/dashboard/post/edit/{page}', [PageController::class, 'editPage'])->middleware(['admin']);
 
 Route::get('/', function () {
 
@@ -59,7 +59,7 @@ Route::get('/post/{page}', [PageController::class, 'openPage']);
 Route::get('/kontaktai', [MessageController::class, 'open']);
 Route::post('/kontaktai-send', [MessageController::class, 'store']);
 Route::get('/messages/render/read/{message}', [MessageController::class, 'read']);
-Route::delete('/dashboard/messages/delete/{message}', [MessageController::class, 'delete']);
+Route::delete('/dashboard/messages/delete/{message}', [MessageController::class, 'delete'])->middleware(['admin']);
 
 Route::get('/doctors',[DoctorController::class, 'viewDoctors']);
 
@@ -72,65 +72,65 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::post('/dashboard/users/edit/{user}', [AdminController::class, 'update']);
-Route::post('/dashboard/users/new', [AdminController::class, 'store']);
+Route::post('/dashboard/users/edit/{user}', [AdminController::class, 'update'])->middleware(['admin']);
+Route::post('/dashboard/users/new', [AdminController::class, 'store'])->middleware(['admin']);
 
-Route::post('/dashboard/doctors/new', [AdminController::class, 'storeDoctor']);
-Route::post('/dashboard/doctors/create', [AdminController::class, 'createDoctor']);
-Route::post('/dashboard/doctors/edit/{doctor}', [AdminController::class, 'updateDoctor']);
-Route::delete('/dashboard/doctors/delete/{doctor}', [AdminController::class, 'deleteDoctor']);
+Route::post('/dashboard/doctors/new', [AdminController::class, 'storeDoctor'])->middleware(['admin']);
+Route::post('/dashboard/doctors/create', [AdminController::class, 'createDoctor'])->middleware(['admin']);
+Route::post('/dashboard/doctors/edit/{doctor}', [AdminController::class, 'updateDoctor'])->middleware(['admin']);
+Route::delete('/dashboard/doctors/delete/{doctor}', [AdminController::class, 'deleteDoctor'])->middleware(['admin']);
 
-Route::get('/dashboard/services', [ServiceController::class, 'open']);
+Route::get('/dashboard/services', [ServiceController::class, 'open'])->middleware(['admin']);
 
-Route::get('/dashboard/messages', [MessageController::class, 'openMessages']);
+Route::get('/dashboard/messages', [MessageController::class, 'openMessages'])->middleware(['admin']);
 
 
-Route::get('/dashboard/doctors/edit/{doctor}', [DoctorController::class, 'openEditDoctor']);
+Route::get('/dashboard/doctors/edit/{doctor}', [DoctorController::class, 'openEditDoctor'])->middleware(['admin']);
 
-Route::get('/dashboard/categories', [CategoriesController::class, 'open']);
+Route::get('/dashboard/categories', [CategoriesController::class, 'open'])->middleware(['admin']);
 
-Route::get('/dashboard/doctors/vouchers/{doctor}', [AdminController::class, 'openVouchers']);
-Route::post('/dashboard/categories/new', [CategoriesController::class, 'store']);
-Route::post('/dashboard/categories/edit/{category}', [CategoriesController::class, 'update']);
-Route::delete('/dashboard/categories/delete/{category}', [CategoriesController::class, 'delete']);
+Route::get('/dashboard/doctors/vouchers/{doctor}', [AdminController::class, 'openVouchers'])->middleware(['admin']);
+Route::post('/dashboard/categories/new', [CategoriesController::class, 'store'])->middleware(['admin']);
+Route::post('/dashboard/categories/edit/{category}', [CategoriesController::class, 'update'])->middleware(['admin']);
+Route::delete('/dashboard/categories/delete/{category}', [CategoriesController::class, 'delete'])->middleware(['admin']);
 
-Route::post('/dashboard/doctors/reservation/create/{doctor}', [AdminController::class, 'createReservations']);
-Route::post('/dashboard/doctors/voucher/new', [VoucherController::class, 'createVoucher']);
+Route::post('/dashboard/doctors/reservation/create/{doctor}', [AdminController::class, 'createReservations'])->middleware(['admin']);
+Route::post('/dashboard/doctors/voucher/new', [VoucherController::class, 'createVoucher'])->middleware(['admin']);
 Route::get('/doctors/reservation/set/{doctor}/{reservation}', [ReservationController::class, 'createVizit'])->middleware(['auth']);
 Route::post('/doctors/reservation/set/{doctor}/{reservation}', [ReservationController::class, 'confirmVizit'])->middleware(['auth']);
 
 ///doctors/rezervation/1
 // Services routes
-Route::post('/dashboard/services/new', [ServiceController::class, 'store']);
-Route::post('/dashboard/services/edit/{service}', [ServiceController::class, 'update']);
-Route::delete('/dashboard/services/delete/{service}', [ServiceController::class, 'delete']);
-Route::post('/dashboard/doctors/services/{doctor}', [ServiceController::class, 'updateDoctor']);
-Route::get('/dashboard/doctors/reservations/{doctor}', [ReservationController::class, 'openDoctorReservations']);
-Route::post('/dashboard/doctor/reservation/reset/{reservation}', [ReservationController::class, 'resetReservation']);
-Route::post('/dashboard/doctor/reservation/delete/{reservation}', [ReservationController::class, 'deleteReservation']);
+Route::post('/dashboard/services/new', [ServiceController::class, 'store'])->middleware(['admin']);
+Route::post('/dashboard/services/edit/{service}', [ServiceController::class, 'update'])->middleware(['admin']);
+Route::delete('/dashboard/services/delete/{service}', [ServiceController::class, 'delete'])->middleware(['admin']);
+Route::post('/dashboard/doctors/services/{doctor}', [ServiceController::class, 'updateDoctor'])->middleware(['admin']);
+Route::get('/dashboard/doctors/reservations/{doctor}', [ReservationController::class, 'openDoctorReservations'])->middleware(['admin']);
+Route::post('/dashboard/doctor/reservation/reset/{reservation}', [ReservationController::class, 'resetReservation'])->middleware(['admin']);
+Route::post('/dashboard/doctor/reservation/delete/{reservation}', [ReservationController::class, 'deleteReservation'])->middleware(['admin']);
 
 
-Route::get('/dashboard/doctors/services/{doctor}', [DoctorController::class, 'openDoctorServices']) ;
+Route::get('/dashboard/doctors/services/{doctor}', [DoctorController::class, 'openDoctorServices']) ->middleware(['admin']);
 
 // User routes
-Route::post('/profile/update', [UserController::class, 'update']);
-Route::post('/profile/update/password', [UserController::class, 'updatePassword']);
-Route::get('/profile', [UserController::class, 'openProfile']);
+Route::post('/profile/update', [UserController::class, 'update'])->middleware(['auth']);
+Route::post('/profile/update/password', [UserController::class, 'updatePassword'])->middleware(['auth']);
+Route::get('/profile', [UserController::class, 'openProfile'])->middleware(['auth']);
 
-Route::get('/profile/{reservation}', [UserController::class, 'openProfileReservation']);
+Route::get('/profile/{reservation}', [UserController::class, 'openProfileReservation'])->middleware(['auth']);
 
 
 
 // Doctor
 
-Route::get('/doctor', [DoctorController::class, 'openDoctorDashboard']);
+Route::get('/doctor', [DoctorController::class, 'openDoctorDashboard'])->middleware(['doctor']);
 
-Route::get('/doctor/reservation-{reservation}-doctor{doctor}', [DoctorController::class, 'openReservation']);
-Route::post('/doctor/medicine/prescribe/{reservation}/{user}', [DoctorController::class, 'prescribe']);
-Route::delete('/doctor/delete/prescription/{id}', [DoctorController::class, 'unPrescribe']);
-Route::post('/doctor/new/medicine', [DoctorController::class, 'newMedicine']);
-Route::post('/doctor/update/medicine/{medicine}', [DoctorController::class, 'updateMedicine']);
-Route::delete('/doctor/delete/medicine/{medicine}', [DoctorController::class, 'deleteMedicine']);
+Route::get('/doctor/reservation-{reservation}-doctor{doctor}', [DoctorController::class, 'openReservation'])->middleware(['doctor']);
+Route::post('/doctor/medicine/prescribe/{reservation}/{user}', [DoctorController::class, 'prescribe'])->middleware(['doctor']);
+Route::delete('/doctor/delete/prescription/{id}', [DoctorController::class, 'unPrescribe'])->middleware(['doctor']);
+Route::post('/doctor/new/medicine', [DoctorController::class, 'newMedicine'])->middleware(['doctor']);
+Route::post('/doctor/update/medicine/{medicine}', [DoctorController::class, 'updateMedicine'])->middleware(['doctor']);
+Route::delete('/doctor/delete/medicine/{medicine}', [DoctorController::class, 'deleteMedicine'])->middleware(['doctor']);
 
 
 
@@ -139,7 +139,7 @@ Route::get('/doctor-search/{query}', [DoctorController::class, 'autocompleteSear
 Route::get('/user-search/{query}', [UserController::class, 'autocompleteSearch']);
 
 
-Route::delete('dashboard/users/delete/{user}', [AdminController::class, 'delete']);
+Route::delete('dashboard/users/delete/{user}', [AdminController::class, 'delete'])->middleware(['admin']);
 Route::get('/autocomplete-search/{query}', [TypeaheadController::class, 'autocompleteSearch']);
 Route::get('/doctors-reservation/{query}', [ReservationController::class, 'list']);
 

@@ -191,7 +191,7 @@
                 <h1 class="mt-1 text-3xl font-semibold text-[#35BCA3] mx-auto">Mano Vizitai</h1>
                 <div class="flex justify-between mt-5">
 
-                    <div class="w-96 flex flex-col gap-[1px]">
+                    <div class="w-full flex flex-col gap-[1px]">
                         <div class="w-full h-24 bg-gradient-to-r from-[#40AACA] to-[#35BCA3] rounded-t-md p-5">
                             <div class="flex justify-between">
                                 <div class="flex-col">
@@ -217,31 +217,6 @@
                         </div>
                     </div>
 
-                    <div class="w-96 flex flex-col gap-[1px]">
-                        <div class="w-full h-24 bg-gradient-to-r from-[#40AACA] to-[#35BCA3] rounded-t-md p-5">
-                            <div class="flex justify-between">
-                                <div class="flex-col">
-                                    <h1 class="text-3xl text-white font-semibold">2</h1>
-                                    <h1 class="text-1xl text-white font-semibold">Visi Vizitai</h1>
-                                </div>
-                                <svg class="w-12 h-12 text-white my-auto" fill="none" stroke="currentColor"
-                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                </svg>
-                            </div>
-
-                        </div>
-                        <div
-                            class="w-full h-12 bg-gradient-to-r from-[#40AACA] to-[#35BCA3] rounded-b-md shadow-md py-3 px-5 flex gap-2">
-                            <svg class="w-6 h-6 text-white my-auto" fill="none" stroke="currentColor"
-                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                            <h1 class="text-md text-white font-semibold">Vizitai</h1>
-                        </div>
-                    </div>
                 </div>
 
 
@@ -317,7 +292,7 @@
 
         <div id="medicine_content" class="mt-5 w-full hidden">
             <div class="w-full flex justify-center">
-                <h1 class="mt-1 text-3xl font-semibold text-[#35BCA3] mx-auto">Mano Vaistai</h1>
+                <h1 class="mt-1 text-3xl font-semibold text-[#35BCA3] mx-auto">Mano rekomenduojami nereceptiniai vaistai</h1>
             </div>
 
             <div class="overflow-x-auto relative shadow-md sm:rounded-lg mt-5">

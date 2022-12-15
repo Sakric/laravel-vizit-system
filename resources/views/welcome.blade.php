@@ -96,7 +96,7 @@
         </div>
     </div>
 
-        <div class="flex flex-wrap px-10 gap-10 justify-center">
+        <div class="flex flex-wrap px-10 gap-10 justify-center mb-3">
 
             @foreach($pages as $page)
 

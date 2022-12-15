@@ -22,7 +22,8 @@ class AdminController extends Controller
             'lastname' => 'required',
             'email' => 'required|email',
             'role_id' => 'required',
-            'password' => 'required'
+            'password' => 'required',
+            'phone' => 'required'
         ]);
         $attributes['password'] = Hash::make($attributes['password']);
         $user->create($attributes);
@@ -35,7 +36,8 @@ class AdminController extends Controller
             'name' => 'required',
             'lastname' => 'required',
             'email' => 'required|email',
-            'role_id' => 'required'
+            'role_id' => 'required',
+            'phone' => 'required'
         ]);
 
         $user->update($attributes);
